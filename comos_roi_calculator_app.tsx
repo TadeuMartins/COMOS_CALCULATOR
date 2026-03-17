@@ -170,7 +170,7 @@ export default function ComosRoiCalculatorApp() {
       engineeringProductivity: "Produtividade de engenharia",
       reworkReduction: "Redução de retrabalho",
       searchValidation: "Busca e validação de informação",
-      assumptionsTitle: "Premissas, racional e referências",
+      assumptionsTitle: "Premissas de conversão do cenário",
       methodology: "Metodologia e coerência dos cálculos",
       p1: "Esta calculadora usa três drivers gerais de valor: ganho de produtividade em engenharia, redução de retrabalho e redução do tempo gasto buscando ou validando informação técnica.",
       p2: "As premissas-base foram mantidas em 8% de ganho de produtividade, 15% de redução do retrabalho atual e 1 h/semana por usuário em busca/validação recuperada, por estarem coerentes e conservadoras frente ao conjunto das fontes externas.",
@@ -183,6 +183,7 @@ export default function ComosRoiCalculatorApp() {
       a3: "Redução de tempo de busca/validação",
       externalSourcesLabel: "Fontes externas",
       siemensSourcesLabel: "Fontes Siemens",
+      assumptionHoursPerUser: "h/semana por usuário",
       hoursMonth: "h/mês",
       portuguese: "Português",
       english: "English",
@@ -233,7 +234,7 @@ export default function ComosRoiCalculatorApp() {
       engineeringProductivity: "Engineering productivity",
       reworkReduction: "Rework reduction",
       searchValidation: "Search and information validation",
-      assumptionsTitle: "Assumptions, rationale, and references",
+      assumptionsTitle: "Scenario conversion assumptions",
       methodology: "Methodology and calculation coherence",
       p1: "This calculator uses three general value drivers: engineering productivity gain, rework reduction, and reduced time spent searching for or validating technical information.",
       p2: "The base assumptions remain 8% engineering productivity gain, 15% reduction of current rework, and 1 hour/week per user of recovered search/validation time because they are coherent and conservative against the external evidence set.",
@@ -246,6 +247,7 @@ export default function ComosRoiCalculatorApp() {
       a3: "Search/validation time reduction",
       externalSourcesLabel: "External sources",
       siemensSourcesLabel: "Siemens sources",
+      assumptionHoursPerUser: "h/week per user",
       hoursMonth: "h/month",
       portuguese: "Português",
       english: "English",
@@ -306,7 +308,12 @@ export default function ComosRoiCalculatorApp() {
   const assumptions = [
     {
       title: t.a1,
-      externalSources: [
+      highlight: percent(preset.engineeringGain * 100, locale),
+      description:
+        language === "pt"
+          ? "Baseado em racional de engenharia digital integrada e benchmark de cenário."
+          : "Based on integrated digital engineering rationale and scenario benchmark.",
+      sources: [
         {
           label: language === "pt" ? "Chalmers systematic review sobre quantificação de valor em BIM" : "Chalmers systematic review on quantifying BIM investment value",
           url: "https://research.chalmers.se/publication/540280/file/540280_Fulltext.pdf",
@@ -315,8 +322,6 @@ export default function ComosRoiCalculatorApp() {
           label: language === "pt" ? "ScienceDirect 2024 sobre influência do BIM em tempo e custo" : "ScienceDirect 2024 on BIM influence on time and cost",
           url: "https://www.sciencedirect.com/science/article/pii/S2590123024008107",
         },
-      ],
-      siemensSources: [
         {
           label: language === "pt" ? "COMOS brochure com caso Novartis (8%–12% engineering savings)" : "COMOS brochure with Novartis case (8%–12% engineering savings)",
           url: "https://support.industry.siemens.com/cs/attachments/109765354/COMOS_Imagebroschuere_EN.pdf",
@@ -333,7 +338,12 @@ export default function ComosRoiCalculatorApp() {
     },
     {
       title: t.a2,
-      externalSources: [
+      highlight: percent(preset.reworkReduction * 100, locale),
+      description:
+        language === "pt"
+          ? "Aplicado sobre o custo anual estimado de retrabalho atual."
+          : "Applied to the estimated current annual rework cost.",
+      sources: [
         {
           label: language === "pt" ? "NIST sobre custo de interoperabilidade inadequada" : "NIST on the cost of inadequate interoperability",
           url: "https://nvlpubs.nist.gov/nistpubs/gcr/2004/nist.gcr.04-867.pdf",
@@ -350,8 +360,6 @@ export default function ComosRoiCalculatorApp() {
           label: language === "pt" ? "PlanGrid/FMI sobre retrabalho ligado a dados ruins e má comunicação" : "PlanGrid/FMI on rework caused by bad data and miscommunication",
           url: "https://pg.plangrid.com/rs/572-JSV-775/images/Construction_Disconnected.pdf",
         },
-      ],
-      siemensSources: [
         {
           label: language === "pt" ? "COMOS for EPC (reduction of errors and reworking)" : "COMOS for EPC (reduction of errors and reworking)",
           url: "https://assets.new.siemens.com/siemens/assets/api/uuid%3A36e6fda0-c1ee-4c93-83f8-caaa477ac03d/sie-onepager-comos-for-epc-en-iedit-v260618.pdf",
@@ -364,7 +372,12 @@ export default function ComosRoiCalculatorApp() {
     },
     {
       title: t.a3,
-      externalSources: [
+      highlight: `${numberFmt(preset.infoHoursPerWeek, locale, 1)} ${t.assumptionHoursPerUser}`,
+      description:
+        language === "pt"
+          ? "Conversão geral para eficiência na localização e validação da informação."
+          : "General conversion for efficiency in finding and validating information.",
+      sources: [
         {
           label: language === "pt" ? "McKinsey The Social Economy" : "McKinsey The Social Economy",
           url: "https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/the-social-economy",
@@ -377,8 +390,6 @@ export default function ComosRoiCalculatorApp() {
           label: language === "pt" ? "Deloitte Access Economics 2025 sobre adoção digital na construção" : "Deloitte Access Economics 2025 on digital adoption in construction",
           url: "https://www.deloitte.com/au/en/services/economics/analysis/state-digital-adoption-construction-industry.html",
         },
-      ],
-      siemensSources: [
         {
           label: language === "pt" ? "COMOS Lifecycle (common database e seamless flow of information)" : "COMOS Lifecycle (common database and seamless flow of information)",
           url: "https://siemens.ebene1.org/comos-lifecycle/pdf/comos_lifecycle_en.pdf",
@@ -575,13 +586,14 @@ export default function ComosRoiCalculatorApp() {
               <CardContent className="pt-5">
                 <div className="grid md:grid-cols-3 gap-4">
                   {assumptions.map((item) => (
-                    <div key={item.title} className="rounded-2xl border border-border p-4 bg-secondary/30 space-y-4">
-                      <div className="text-sm text-muted-foreground mb-1">{item.title}</div>
+                    <article key={item.title} className="flex flex-col justify-between rounded-3xl border border-border/80 bg-white/80 p-5 shadow-sm">
                       <div className="space-y-3">
-                        <SourceList title={t.externalSourcesLabel} sources={item.externalSources} itemTitle={item.title} />
-                        <SourceList title={t.siemensSourcesLabel} sources={item.siemensSources} itemTitle={item.title} />
+                        <h4 className="text-sm leading-7 text-slate-600">{item.title}</h4>
+                        <strong className="block text-[2rem] font-semibold leading-tight tracking-tight text-[#2BAAAB]">{item.highlight}</strong>
+                        <div className="max-w-xs text-sm leading-7 text-slate-700">{item.description}</div>
                       </div>
-                    </div>
+                      <SourceList sources={item.sources} itemTitle={item.title} />
+                    </article>
                   ))}
                 </div>
               </CardContent>
@@ -691,33 +703,29 @@ function BenefitBar({ label, value, total, currency, locale }: { label: string; 
 }
 
 function SourceList({
-  title,
   sources,
   itemTitle,
 }: {
-  title: string;
   sources: Array<{ label: string; url: string }>;
   itemTitle: string;
 }) {
   return (
-    <div>
-      <div className="mb-2 text-sm font-medium text-slate-700">{title}</div>
-      <ul className="space-y-2 text-sm">
+    <ul className="mt-6 flex flex-wrap gap-2">
         {sources.map((source, index) => (
           <li key={source.url}>
             <a
               href={source.url}
               target="_blank"
               rel="noreferrer"
-              aria-label={`${itemTitle} source ${index + 1}`}
-              className="inline-flex items-start gap-2 text-slate-700 underline decoration-slate-300 underline-offset-4 transition hover:text-slate-900"
+              aria-label={source.label}
+              title={source.label}
+              className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
             >
-              <Link2 className="mt-0.5 h-4 w-4 shrink-0" />
-              <span>{source.label}</span>
+              <Link2 className="h-3.5 w-3.5 shrink-0" />
+              <span className="sr-only">{source.label}</span>
             </a>
           </li>
         ))}
       </ul>
-    </div>
   );
 }
