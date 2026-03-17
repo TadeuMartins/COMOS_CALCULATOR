@@ -171,8 +171,6 @@ export default function ComosRoiCalculatorApp() {
       reworkReduction: "Redução de retrabalho",
       searchValidation: "Busca e validação de informação",
       assumptionsTitle: "Premissas, racional e referências",
-      assumptionsIntro:
-        "Links por premissa, com resumo opcional apenas quando você quiser mais contexto.",
       methodology: "Metodologia e coerência dos cálculos",
       p1: "Esta calculadora usa três drivers gerais de valor: ganho de produtividade em engenharia, redução de retrabalho e redução do tempo gasto buscando ou validando informação técnica.",
       p2: "As premissas-base foram mantidas em 8% de ganho de produtividade, 15% de redução do retrabalho atual e 1 h/semana por usuário em busca/validação recuperada, por estarem coerentes e conservadoras frente ao conjunto das fontes externas.",
@@ -181,20 +179,10 @@ export default function ComosRoiCalculatorApp() {
       p5: "No modo benchmark automático, as horas mensais são estimadas a partir do número de usuários impactados. Você ainda pode desligar esse modo para inserir valores reais do cliente quando tiver dados melhores.",
       p6: "Para uma versão mais robusta, você pode complementar o app com evidências internas, benchmark do setor e ganhos adicionais de handover, operação e manutenção.",
       a1: "Ganho de produtividade em engenharia",
-      a1n: "8% no cenário base é moderado a conservador frente às referências externas e ao benchmark Siemens.",
       a2: "Redução de retrabalho",
-      a2n: "15% no cenário base é aplicado somente sobre o retrabalho atual estimado, e não sobre o custo total do projeto.",
       a3: "Redução de tempo de busca/validação",
-      a3n: "1 h/semana por usuário no cenário base é uma hipótese prudente frente às referências externas.",
-      externalBasisLabel: "Base externa",
-      siemensBasisLabel: "Base Siemens",
-      rationaleLabel: "Leitura técnica",
-      confidenceLabel: "Nível de confiança",
-      recommendedRangeLabel: "Faixa recomendada",
       externalSourcesLabel: "Fontes externas",
       siemensSourcesLabel: "Fontes Siemens",
-      methodologySummary: "Ver resumo da metodologia",
-      hoursWeekUser: "h/semana por usuário",
       hoursMonth: "h/mês",
       portuguese: "Português",
       english: "English",
@@ -246,8 +234,6 @@ export default function ComosRoiCalculatorApp() {
       reworkReduction: "Rework reduction",
       searchValidation: "Search and information validation",
       assumptionsTitle: "Assumptions, rationale, and references",
-      assumptionsIntro:
-        "Links by premise, with an optional summary only when you want more context.",
       methodology: "Methodology and calculation coherence",
       p1: "This calculator uses three general value drivers: engineering productivity gain, rework reduction, and reduced time spent searching for or validating technical information.",
       p2: "The base assumptions remain 8% engineering productivity gain, 15% reduction of current rework, and 1 hour/week per user of recovered search/validation time because they are coherent and conservative against the external evidence set.",
@@ -256,20 +242,10 @@ export default function ComosRoiCalculatorApp() {
       p5: "In automatic benchmark mode, monthly hours are estimated from the number of impacted users. You can still turn this mode off to enter actual client values when better data is available.",
       p6: "For a more robust version, you can complement the app with internal evidence, industry benchmarks, and additional handover, operations, and maintenance gains.",
       a1: "Engineering productivity gain",
-      a1n: "8% in the base scenario is moderate to conservative against the external literature and Siemens benchmark evidence.",
       a2: "Rework reduction",
-      a2n: "15% in the base scenario is applied only to estimated current rework, not to the total project cost.",
       a3: "Search/validation time reduction",
-      a3n: "1 hour/week per user in the base scenario is a prudent assumption versus the external references.",
-      externalBasisLabel: "External basis",
-      siemensBasisLabel: "Siemens basis",
-      rationaleLabel: "Technical reading",
-      confidenceLabel: "Confidence level",
-      recommendedRangeLabel: "Recommended range",
       externalSourcesLabel: "External sources",
       siemensSourcesLabel: "Siemens sources",
-      methodologySummary: "View methodology summary",
-      hoursWeekUser: "h/week per user",
       hoursMonth: "h/month",
       portuguese: "Português",
       english: "English",
@@ -330,25 +306,6 @@ export default function ComosRoiCalculatorApp() {
   const assumptions = [
     {
       title: t.a1,
-      value: percent(scenarioPresets[scenario].engineeringGain * 100, locale),
-      note: t.a1n,
-      externalBasis:
-        language === "pt"
-          ? "A literatura de BIM e engenharia digital integrada mostra ganhos mensuráveis de produtividade, prazo e redução de mudanças/retrabalho quando os dados são estruturados e reutilizáveis."
-          : "BIM and integrated digital engineering literature shows measurable productivity, schedule, and change/rework benefits when data is structured and reusable.",
-      siemensBasis:
-        language === "pt"
-          ? "A Siemens documenta no COMOS economias de engenharia de 8% a 12% na Novartis e, em casos específicos, até 20% de redução do tempo de engenharia."
-          : "Siemens documents 8% to 12% engineering savings with COMOS at Novartis and, in specific use cases, up to 20% shorter engineering time.",
-      rationale:
-        language === "pt"
-          ? "Como benchmark-base, 8% permanece coerente e conservador. Mantivemos o cenário agressivo em 10% para refletir melhor a faixa externa recomendada."
-          : "As a base benchmark, 8% remains coherent and conservative. The aggressive scenario was set to 10% to better reflect the recommended external range.",
-      confidence: language === "pt" ? "Médio-alto" : "Medium-high",
-      benchmarkRange:
-        language === "pt"
-          ? "Faixa externa defensável: 5%–10%. Evidência Siemens: 8%–12%, com casos específicos acima disso."
-          : "Defensible external range: 5%–10%. Siemens evidence: 8%–12%, with specific cases above that.",
       externalSources: [
         {
           label: language === "pt" ? "Chalmers systematic review sobre quantificação de valor em BIM" : "Chalmers systematic review on quantifying BIM investment value",
@@ -376,25 +333,6 @@ export default function ComosRoiCalculatorApp() {
     },
     {
       title: t.a2,
-      value: percent(scenarioPresets[scenario].reworkReduction * 100, locale),
-      note: t.a2n,
-      externalBasis:
-        language === "pt"
-          ? "Estudos de interoperabilidade, rework em projetos e coordenação digital mostram que dados ruins, fragmentação e falhas de comunicação são causas recorrentes de retrabalho."
-          : "Interoperability, project rework, and digital coordination studies show that poor data, fragmentation, and communication failures are recurring rework drivers.",
-      siemensBasis:
-        language === "pt"
-          ? "A Siemens conecta o COMOS a dados consistentes e sempre atualizados, menos erros, menos rework e comissionamento mais rápido."
-          : "Siemens links COMOS to always up-to-date consistent data, fewer errors, less rework, and faster commissioning.",
-      rationale:
-        language === "pt"
-          ? "15% de redução sobre o retrabalho atual estimado segue coerente e moderado. O cenário agressivo foi ajustado para 20% para manter aderência à faixa externa principal."
-          : "A 15% reduction on currently estimated rework remains coherent and moderate. The aggressive scenario was adjusted to 20% to stay aligned with the main external range.",
-      confidence: language === "pt" ? "Alto" : "High",
-      benchmarkRange:
-        language === "pt"
-          ? "Faixa recomendada sobre o retrabalho atual: 10%–20%."
-          : "Recommended range on current rework: 10%–20%.",
       externalSources: [
         {
           label: language === "pt" ? "NIST sobre custo de interoperabilidade inadequada" : "NIST on the cost of inadequate interoperability",
@@ -426,25 +364,6 @@ export default function ComosRoiCalculatorApp() {
     },
     {
       title: t.a3,
-      value: `${numberFmt(scenarioPresets[scenario].infoHoursPerWeek, locale, 1)} ${t.hoursWeekUser}`,
-      note: t.a3n,
-      externalBasis:
-        language === "pt"
-          ? "McKinsey, Deloitte e pesquisas recentes mostram que profissionais gastam uma parcela relevante da semana procurando, validando ou reconciliando informação."
-          : "McKinsey, Deloitte, and recent surveys show that professionals spend a meaningful share of the week searching for, validating, or reconciling information.",
-      siemensBasis:
-        language === "pt"
-          ? "A Siemens posiciona o COMOS como base comum de dados, single source of truth e fluxo contínuo de informação ao longo do ciclo de vida."
-          : "Siemens positions COMOS as a common data foundation, a single source of truth, and a seamless information flow across the lifecycle.",
-      rationale:
-        language === "pt"
-          ? "1 h/semana por usuário segue bastante conservadora diante das referências externas, que sugerem economias potenciais bem maiores em ambientes mais fragmentados."
-          : "1 hour/week per user remains highly conservative against the external references, which suggest materially larger potential savings in more fragmented environments.",
-      confidence: language === "pt" ? "Alto" : "High",
-      benchmarkRange:
-        language === "pt"
-          ? "Faixa externa defensável: 1–3 h/semana por usuário, com 1 h/semana mantida como ponto central prudente."
-          : "Defensible external range: 1–3 hours/week per user, with 1 hour/week kept as the prudent midpoint.",
       externalSources: [
         {
           label: language === "pt" ? "McKinsey The Social Economy" : "McKinsey The Social Economy",
@@ -654,12 +573,10 @@ export default function ComosRoiCalculatorApp() {
                 <CardTitle className="flex items-center gap-2 text-lg text-slate-700"><RefreshCcw className="h-5 w-5 text-[#2BAAAB]" /> {t.assumptionsTitle}</CardTitle>
               </CardHeader>
               <CardContent className="pt-5">
-                <p className="mb-4 text-sm text-slate-600">{t.assumptionsIntro}</p>
                 <div className="grid md:grid-cols-3 gap-4">
                   {assumptions.map((item) => (
                     <div key={item.title} className="rounded-2xl border border-border p-4 bg-secondary/30 space-y-4">
                       <div className="text-sm text-muted-foreground mb-1">{item.title}</div>
-                      <div className="text-2xl font-semibold text-[#2BAAAB]">{item.value}</div>
                       <div className="space-y-3">
                         <SourceList title={t.externalSourcesLabel} sources={item.externalSources} itemTitle={item.title} />
                         <SourceList title={t.siemensSourcesLabel} sources={item.siemensSources} itemTitle={item.title} />
@@ -674,18 +591,13 @@ export default function ComosRoiCalculatorApp() {
               <CardHeader className="border-b border-border/50 pb-4">
                 <CardTitle className="text-lg text-slate-700">{t.methodology}</CardTitle>
               </CardHeader>
-              <CardContent className="pt-5">
-                <details className="rounded-2xl border border-border bg-secondary/30 p-4 text-sm text-slate-600 leading-6">
-                  <summary className="cursor-pointer font-medium text-slate-700">{t.methodologySummary}</summary>
-                  <div className="mt-3 space-y-3">
-                    <p>{t.p1}</p>
-                    <p>{t.p2}</p>
-                    <p>{t.p3}</p>
-                    <p>{t.p4}</p>
-                    <p>{t.p5}</p>
-                    <p>{t.p6}</p>
-                  </div>
-                </details>
+              <CardContent className="text-sm text-slate-600 leading-6 space-y-3 pt-5">
+                <p>{t.p1}</p>
+                <p>{t.p2}</p>
+                <p>{t.p3}</p>
+                <p>{t.p4}</p>
+                <p>{t.p5}</p>
+                <p>{t.p6}</p>
               </CardContent>
             </Card>
           </div>
