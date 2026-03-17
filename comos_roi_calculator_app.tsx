@@ -403,7 +403,7 @@ export default function ComosRoiCalculatorApp() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-slate-900/10 bg-slate-950 px-6 py-4 text-white shadow-lg md:px-10">
+      <header className="border-b border-white/10 bg-[#2BAAAB] px-6 py-4 text-white shadow-lg md:px-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
@@ -450,15 +450,6 @@ export default function ComosRoiCalculatorApp() {
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1.7fr)_minmax(320px,0.9fr)] xl:items-start">
           <div className="rounded-[2rem] border border-border/70 bg-gradient-to-br from-white via-white to-slate-50/80 p-6 shadow-sm md:p-8">
-            <div className="mb-4 flex items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#2BAAAB]/10 ring-1 ring-[#2BAAAB]/15">
-                <ComosLogo className="h-11 w-11 drop-shadow-sm" />
-              </div>
-              <div>
-                <div className="text-xl font-extrabold tracking-brand text-[#2BAAAB]">COMOS</div>
-                <div className="text-xs text-slate-400 tracking-[0.28em] uppercase">by Siemens</div>
-              </div>
-            </div>
             <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.24em] text-slate-400">
               <span className="text-[#2BAAAB]">{t.businessCase}</span>
               <span className="h-1 w-1 rounded-full bg-slate-300" aria-hidden="true" />
@@ -468,40 +459,19 @@ export default function ComosRoiCalculatorApp() {
             <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600 md:text-lg">{t.subtitle}</p>
           </div>
 
-          <Card className="rounded-[2rem] border border-border/70 shadow-sm">
-            <CardHeader className="border-b border-border/50 pb-4">
-              <CardTitle className="flex items-center gap-2 text-lg text-slate-700">
-                <Calculator className="h-5 w-5 text-[#2BAAAB]" />
-                {t.benchmarkScenario}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4 pt-5">
-              <div className="rounded-2xl bg-secondary/60 p-4 text-sm leading-6 text-slate-600">
-                {t.autoBenchmarkDesc}
-              </div>
-              <Tabs value={scenario} onValueChange={(v) => setScenario(v as ScenarioKey)}>
-                <TabsList className="grid h-auto w-full grid-cols-3 rounded-2xl">
-                  <TabsTrigger value="conservador" className="rounded-xl">{t.conservative}</TabsTrigger>
-                  <TabsTrigger value="base" className="rounded-xl">{t.base}</TabsTrigger>
-                  <TabsTrigger value="agressivo" className="rounded-xl">{t.aggressive}</TabsTrigger>
-                </TabsList>
-              </Tabs>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl border border-border/70 bg-white p-4">
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{t.engPerUser}</div>
-                  <div className="mt-2 text-2xl font-semibold text-slate-900">
-                    {benchmarkHoursPerUserMonth.engineering} <span className="text-sm font-medium text-slate-500">{t.hoursMonth}</span>
-                  </div>
-                </div>
-                <div className="rounded-2xl border border-border/70 bg-white p-4">
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{t.infoPerUser}</div>
-                  <div className="mt-2 text-2xl font-semibold text-slate-900">
-                    {benchmarkHoursPerUserMonth.info} <span className="text-sm font-medium text-slate-500">{t.hoursMonth}</span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <section
+            aria-label={t.benchmarkScenario}
+            className="w-full rounded-[2rem] border border-border/70 bg-white/90 p-5 shadow-sm xl:max-w-[420px] xl:justify-self-end"
+          >
+            <Label className="mb-2 block text-slate-600">{t.benchmarkScenario}</Label>
+            <Tabs value={scenario} onValueChange={(v) => setScenario(v as ScenarioKey)}>
+              <TabsList className="grid h-12 w-full grid-cols-3 rounded-2xl">
+                <TabsTrigger value="conservador" className="rounded-xl">{t.conservative}</TabsTrigger>
+                <TabsTrigger value="base" className="rounded-xl">{t.base}</TabsTrigger>
+                <TabsTrigger value="agressivo" className="rounded-xl">{t.aggressive}</TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </section>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
