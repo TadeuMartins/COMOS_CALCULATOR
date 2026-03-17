@@ -172,7 +172,7 @@ export default function ComosRoiCalculatorApp() {
       searchValidation: "Busca e validação de informação",
       assumptionsTitle: "Premissas, racional e referências",
       assumptionsIntro:
-        "As fontes externas sustentam o benchmark principal dos números; as fontes Siemens reforçam a aderência específica ao COMOS.",
+        "Links por premissa, com resumo opcional apenas quando você quiser mais contexto.",
       methodology: "Metodologia e coerência dos cálculos",
       p1: "Esta calculadora usa três drivers gerais de valor: ganho de produtividade em engenharia, redução de retrabalho e redução do tempo gasto buscando ou validando informação técnica.",
       p2: "As premissas-base foram mantidas em 8% de ganho de produtividade, 15% de redução do retrabalho atual e 1 h/semana por usuário em busca/validação recuperada, por estarem coerentes e conservadoras frente ao conjunto das fontes externas.",
@@ -193,6 +193,7 @@ export default function ComosRoiCalculatorApp() {
       recommendedRangeLabel: "Faixa recomendada",
       externalSourcesLabel: "Fontes externas",
       siemensSourcesLabel: "Fontes Siemens",
+      methodologySummary: "Ver resumo da metodologia",
       hoursWeekUser: "h/semana por usuário",
       hoursMonth: "h/mês",
       portuguese: "Português",
@@ -246,7 +247,7 @@ export default function ComosRoiCalculatorApp() {
       searchValidation: "Search and information validation",
       assumptionsTitle: "Assumptions, rationale, and references",
       assumptionsIntro:
-        "External sources are the primary benchmark basis for the numbers; Siemens sources show COMOS-specific alignment.",
+        "Links by premise, with an optional summary only when you want more context.",
       methodology: "Methodology and calculation coherence",
       p1: "This calculator uses three general value drivers: engineering productivity gain, rework reduction, and reduced time spent searching for or validating technical information.",
       p2: "The base assumptions remain 8% engineering productivity gain, 15% reduction of current rework, and 1 hour/week per user of recovered search/validation time because they are coherent and conservative against the external evidence set.",
@@ -267,6 +268,7 @@ export default function ComosRoiCalculatorApp() {
       recommendedRangeLabel: "Recommended range",
       externalSourcesLabel: "External sources",
       siemensSourcesLabel: "Siemens sources",
+      methodologySummary: "View methodology summary",
       hoursWeekUser: "h/week per user",
       hoursMonth: "h/month",
       portuguese: "Português",
@@ -658,14 +660,6 @@ export default function ComosRoiCalculatorApp() {
                     <div key={item.title} className="rounded-2xl border border-border p-4 bg-secondary/30 space-y-4">
                       <div className="text-sm text-muted-foreground mb-1">{item.title}</div>
                       <div className="text-2xl font-semibold text-[#2BAAAB]">{item.value}</div>
-                      <p className="text-sm text-slate-600 mt-2">{item.note}</p>
-                      <div className="space-y-3 text-sm text-slate-600">
-                        <InfoBlock label={t.externalBasisLabel} text={item.externalBasis} />
-                        <InfoBlock label={t.siemensBasisLabel} text={item.siemensBasis} />
-                        <InfoBlock label={t.rationaleLabel} text={item.rationale} />
-                        <InfoBlock label={t.confidenceLabel} text={item.confidence} />
-                        <InfoBlock label={t.recommendedRangeLabel} text={item.benchmarkRange} />
-                      </div>
                       <div className="space-y-3">
                         <SourceList title={t.externalSourcesLabel} sources={item.externalSources} itemTitle={item.title} />
                         <SourceList title={t.siemensSourcesLabel} sources={item.siemensSources} itemTitle={item.title} />
@@ -680,13 +674,18 @@ export default function ComosRoiCalculatorApp() {
               <CardHeader className="border-b border-border/50 pb-4">
                 <CardTitle className="text-lg text-slate-700">{t.methodology}</CardTitle>
               </CardHeader>
-              <CardContent className="text-sm text-slate-600 leading-6 space-y-3 pt-5">
-                <p>{t.p1}</p>
-                <p>{t.p2}</p>
-                <p>{t.p3}</p>
-                <p>{t.p4}</p>
-                <p>{t.p5}</p>
-                <p>{t.p6}</p>
+              <CardContent className="pt-5">
+                <details className="rounded-2xl border border-border bg-secondary/30 p-4 text-sm text-slate-600 leading-6">
+                  <summary className="cursor-pointer font-medium text-slate-700">{t.methodologySummary}</summary>
+                  <div className="mt-3 space-y-3">
+                    <p>{t.p1}</p>
+                    <p>{t.p2}</p>
+                    <p>{t.p3}</p>
+                    <p>{t.p4}</p>
+                    <p>{t.p5}</p>
+                    <p>{t.p6}</p>
+                  </div>
+                </details>
               </CardContent>
             </Card>
           </div>
@@ -775,15 +774,6 @@ function BenefitBar({ label, value, total, currency, locale }: { label: string; 
       <div className="w-full h-3 rounded-full bg-slate-100 overflow-hidden">
         <div className="h-full rounded-full bg-[#2BAAAB]" style={{ width: `${Math.max(0, Math.min(100, width))}%` }} />
       </div>
-    </div>
-  );
-}
-
-function InfoBlock({ label, text }: { label: string; text: string }) {
-  return (
-    <div>
-      <div className="font-medium text-slate-700">{label}</div>
-      <p>{text}</p>
     </div>
   );
 }
