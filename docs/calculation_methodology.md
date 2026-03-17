@@ -229,6 +229,7 @@ Cenário **Base**, modo benchmark automático, todos os valores padrão.
 |---|---|---|
 | Produtividade de engenharia | 6 652 800 × 8 % | **$ 532 224** |
 | Redução de retrabalho | 907 200 × 15 % | **$ 136 080** |
+| Busca/validação — horas/mês/usuário | 1,0 × 52 / 12 ≈ 4,333 h/mês/usuário | — |
 | Busca/validação — teto por cenário | min(2 700, 25 × 4,333 × 12) = min(2 700, 1 300) = 1 300 h | — |
 | Busca/validação — monetizada | 1 300 × 180 | **$ 234 000** |
 | **Total de savings anuais** | 532 224 + 136 080 + 234 000 | **$ 902 304** |
@@ -254,7 +255,7 @@ Cenário **Base**, modo benchmark automático, todos os valores padrão.
 
 | Indicador | Cálculo / Método | Resultado |
 |---|---|---|
-| **NPV** | Σ DCF (taxa 12 %) | **$ 2 170 031** |
+| **NPV** | Σ DCF (taxa 12 %) | **≈ $ 2 170 031** |
 | **IRR** | Newton-Raphson (NPV = 0) | **117,9 %** |
 | **ROI** | (782 304 × 5 − 650 000) / 650 000 × 100 | **501,8 %** |
 | **Payback simples** | 650 000 / 782 304 | **0,83 anos (~10 meses)** |
