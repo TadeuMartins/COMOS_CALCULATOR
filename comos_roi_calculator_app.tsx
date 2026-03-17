@@ -479,16 +479,13 @@ export default function ComosRoiCalculatorApp() {
               <div className="rounded-2xl bg-secondary/60 p-4 text-sm leading-6 text-slate-600">
                 {t.autoBenchmarkDesc}
               </div>
-              <div>
-                <Label className="mb-2 block text-slate-600">{t.benchmarkScenario}</Label>
-                <Tabs value={scenario} onValueChange={(v) => setScenario(v as ScenarioKey)}>
-                  <TabsList className="grid h-auto w-full grid-cols-3 rounded-2xl">
-                    <TabsTrigger value="conservador" className="rounded-xl">{t.conservative}</TabsTrigger>
-                    <TabsTrigger value="base" className="rounded-xl">{t.base}</TabsTrigger>
-                    <TabsTrigger value="agressivo" className="rounded-xl">{t.aggressive}</TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </div>
+              <Tabs value={scenario} onValueChange={(v) => setScenario(v as ScenarioKey)}>
+                <TabsList className="grid h-auto w-full grid-cols-3 rounded-2xl">
+                  <TabsTrigger value="conservador" className="rounded-xl">{t.conservative}</TabsTrigger>
+                  <TabsTrigger value="base" className="rounded-xl">{t.base}</TabsTrigger>
+                  <TabsTrigger value="agressivo" className="rounded-xl">{t.aggressive}</TabsTrigger>
+                </TabsList>
+              </Tabs>
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="rounded-2xl border border-border/70 bg-white p-4">
                   <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{t.engPerUser}</div>
