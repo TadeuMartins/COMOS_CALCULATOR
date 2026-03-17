@@ -183,6 +183,7 @@ export default function ComosRoiCalculatorApp() {
       a3: "Redução de tempo de busca/validação",
       externalSourcesLabel: "Fontes externas",
       siemensSourcesLabel: "Fontes Siemens",
+      assumptionHoursPerUser: "h/semana por usuário",
       hoursMonth: "h/mês",
       portuguese: "Português",
       english: "English",
@@ -246,6 +247,7 @@ export default function ComosRoiCalculatorApp() {
       a3: "Search/validation time reduction",
       externalSourcesLabel: "External sources",
       siemensSourcesLabel: "Siemens sources",
+      assumptionHoursPerUser: "h/week per user",
       hoursMonth: "h/month",
       portuguese: "Português",
       english: "English",
@@ -370,7 +372,7 @@ export default function ComosRoiCalculatorApp() {
     },
     {
       title: t.a3,
-      highlight: `${numberFmt(preset.infoHoursPerWeek, locale, 1)} ${language === "pt" ? "h/semana por usuário" : "h/week per user"}`,
+      highlight: `${numberFmt(preset.infoHoursPerWeek, locale, 1)} ${t.assumptionHoursPerUser}`,
       description:
         language === "pt"
           ? "Conversão geral para eficiência na localização e validação da informação."
@@ -584,14 +586,14 @@ export default function ComosRoiCalculatorApp() {
               <CardContent className="pt-5">
                 <div className="grid md:grid-cols-3 gap-4">
                   {assumptions.map((item) => (
-                    <div key={item.title} className="flex min-h-[250px] flex-col justify-between rounded-[1.75rem] border border-border/80 bg-white/80 p-5 shadow-sm">
+                    <article key={item.title} className="flex flex-col justify-between rounded-3xl border border-border/80 bg-white/80 p-5 shadow-sm">
                       <div className="space-y-3">
-                        <div className="text-sm leading-7 text-slate-600">{item.title}</div>
-                        <div className="text-[2rem] font-semibold leading-tight tracking-tight text-[#2BAAAB]">{item.highlight}</div>
+                        <h4 className="text-sm leading-7 text-slate-600">{item.title}</h4>
+                        <strong className="block text-[2rem] font-semibold leading-tight tracking-tight text-[#2BAAAB]">{item.highlight}</strong>
                         <div className="max-w-xs text-sm leading-7 text-slate-700">{item.description}</div>
                       </div>
                       <SourceList sources={item.sources} itemTitle={item.title} />
-                    </div>
+                    </article>
                   ))}
                 </div>
               </CardContent>
@@ -708,14 +710,14 @@ function SourceList({
   itemTitle: string;
 }) {
   return (
-    <ul className="mt-6 flex flex-wrap gap-2" aria-label={itemTitle}>
+    <ul className="mt-6 flex flex-wrap gap-2">
         {sources.map((source, index) => (
           <li key={source.url}>
             <a
               href={source.url}
               target="_blank"
               rel="noreferrer"
-              aria-label={`${itemTitle}: ${source.label}`}
+              aria-label={source.label}
               title={source.label}
               className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
             >
