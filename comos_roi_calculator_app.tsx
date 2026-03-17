@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { BarChart3, Calculator, TrendingUp, Clock3, RefreshCcw, FileBarChart2, Languages, Link2 } from "lucide-react";
 
@@ -181,8 +180,8 @@ export default function ComosRoiCalculatorApp() {
       a1: "Ganho de produtividade em engenharia",
       a2: "Redução de retrabalho",
       a3: "Redução de tempo de busca/validação",
-      externalSourcesLabel: "Fontes externas",
-      siemensSourcesLabel: "Fontes Siemens",
+      externalSourcesLabel: "Materias externas",
+      siemensSourcesLabel: "Materias Siemens",
       assumptionHoursPerUser: "h/semana por usuário",
       hoursMonth: "h/mês",
       portuguese: "Português",
@@ -245,8 +244,8 @@ export default function ComosRoiCalculatorApp() {
       a1: "Engineering productivity gain",
       a2: "Rework reduction",
       a3: "Search/validation time reduction",
-      externalSourcesLabel: "External sources",
-      siemensSourcesLabel: "Siemens sources",
+      externalSourcesLabel: "External materials",
+      siemensSourcesLabel: "Siemens materials",
       assumptionHoursPerUser: "h/week per user",
       hoursMonth: "h/month",
       portuguese: "Português",
@@ -425,9 +424,10 @@ export default function ComosRoiCalculatorApp() {
                 <div className="text-xs text-slate-400 tracking-widest uppercase">by Siemens</div>
               </div>
             </div>
-            <div className="flex items-center gap-2 mb-2">
-              <Badge className="rounded-full px-3 py-1 text-sm">{t.businessCase}</Badge>
-              <Badge variant="outline" className="rounded-full px-3 py-1 text-sm">{t.roiCalculator}</Badge>
+            <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.24em] text-slate-400">
+              <span className="text-[#2BAAAB]">{t.businessCase}</span>
+              <span className="h-1 w-1 rounded-full bg-slate-300" aria-hidden="true" />
+              <span>{t.roiCalculator}</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{t.title}</h1>
             <p className="text-slate-600 mt-2 max-w-3xl">{t.subtitle}</p>
@@ -592,7 +592,12 @@ export default function ComosRoiCalculatorApp() {
                         <strong className="block text-[2rem] font-semibold leading-tight tracking-tight text-[#2BAAAB]">{item.highlight}</strong>
                         <div className="max-w-xs text-sm leading-7 text-slate-700">{item.description}</div>
                       </div>
-                      <SourceList sources={item.sources} itemTitle={item.title} />
+                      <SourceList
+                        sources={item.sources}
+                        itemTitle={item.title}
+                        externalSourcesLabel={t.externalSourcesLabel}
+                        siemensSourcesLabel={t.siemensSourcesLabel}
+                      />
                     </article>
                   ))}
                 </div>
@@ -702,30 +707,61 @@ function BenefitBar({ label, value, total, currency, locale }: { label: string; 
   );
 }
 
+function isSiemensSource(url: string) {
+  try {
+    const hostname = new URL(url).hostname.toLowerCase();
+    return hostname.includes("siemens.");
+  } catch {
+    return false;
+  }
+}
+
 function SourceList({
   sources,
   itemTitle,
+  externalSourcesLabel,
+  siemensSourcesLabel,
 }: {
   sources: Array<{ label: string; url: string }>;
   itemTitle: string;
+  externalSourcesLabel: string;
+  siemensSourcesLabel: string;
 }) {
+  const groupedSources = [
+    {
+      label: externalSourcesLabel,
+      items: sources.filter((source) => !isSiemensSource(source.url)),
+    },
+    {
+      label: siemensSourcesLabel,
+      items: sources.filter((source) => isSiemensSource(source.url)),
+    },
+  ].filter((group) => group.items.length > 0);
+
   return (
-    <ul className="mt-6 flex flex-wrap gap-2">
-        {sources.map((source, index) => (
-          <li key={source.url}>
-            <a
-              href={source.url}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={source.label}
-              title={source.label}
-              className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
-            >
-              <Link2 className="h-3.5 w-3.5 shrink-0" />
-              <span className="sr-only">{source.label}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+    <div className="mt-6 space-y-3">
+      {groupedSources.map((group) => (
+        <div key={group.label} className="space-y-1.5">
+          <div className="text-[11px] uppercase tracking-[0.18em] text-slate-400">{group.label}</div>
+          <ul className="flex flex-wrap gap-2">
+            {group.items.map((source) => (
+              <li key={source.url}>
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${itemTitle}: ${group.label} — ${source.label}`}
+                  title={source.label}
+                  className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+                >
+                  <Link2 className="h-3.5 w-3.5 shrink-0" />
+                  <span className="sr-only">{source.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
 }
