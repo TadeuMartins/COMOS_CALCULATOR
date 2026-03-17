@@ -105,8 +105,8 @@ function ComosLogo({ className = "h-16 w-16" }: { className?: string }) {
 }
 
 export default function ComosRoiCalculatorApp() {
-  const [language, setLanguage] = useState<LanguageKey>("pt");
-  const [currency, setCurrency] = useState<CurrencyKey>("BRL");
+  const [language, setLanguage] = useState<LanguageKey>("en");
+  const [currency, setCurrency] = useState<CurrencyKey>("USD");
   const [scenario, setScenario] = useState<ScenarioKey>("base");
 
   const [users, setUsers] = useState(25);
@@ -403,25 +403,60 @@ export default function ComosRoiCalculatorApp() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Professional top header band */}
-      <header className="bg-[#2BAAAB] text-white px-6 md:px-10 py-3 shadow-md">
-        <div className="max-w-7xl mx-auto flex items-center gap-3">
-          <ComosLogo className="h-9 w-9" />
-          <span className="font-bold tracking-brand text-lg">COMOS</span>
-          <span className="mx-2 opacity-40 text-xl">|</span>
-          <span className="text-sm opacity-90 tracking-wide">Siemens Digital Industries Software</span>
+      <header className="border-b border-slate-900/10 bg-slate-950 px-6 py-4 text-white shadow-lg md:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
+              <ComosLogo className="h-8 w-8" />
+            </div>
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-bold tracking-brand text-lg">COMOS</span>
+                <span className="text-white/30 text-xl">|</span>
+                <span className="text-sm uppercase tracking-[0.24em] text-white/70">by Siemens</span>
+              </div>
+              <div className="text-sm text-white/75">Siemens Digital Industries Software</div>
+            </div>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:w-auto lg:min-w-[430px]">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
+              <Label className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                <Languages className="h-4 w-4" />
+                {t.language}
+              </Label>
+              <Tabs value={language} onValueChange={(v) => setLanguage(v as LanguageKey)}>
+                <TabsList className="grid h-11 w-full grid-cols-2 rounded-xl bg-white/10 p-1 text-white/70">
+                  <TabsTrigger value="pt" className="rounded-lg data-[state=active]:bg-white data-[state=active]:text-slate-950">{t.portuguese}</TabsTrigger>
+                  <TabsTrigger value="en" className="rounded-lg data-[state=active]:bg-white data-[state=active]:text-slate-950">{t.english}</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
+              <Label className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-white/70">{t.currency}</Label>
+              <Tabs value={currency} onValueChange={(v) => setCurrency(v as CurrencyKey)}>
+                <TabsList className="grid h-11 w-full grid-cols-2 rounded-xl bg-white/10 p-1 text-white/70">
+                  <TabsTrigger value="BRL" className="rounded-lg data-[state=active]:bg-white data-[state=active]:text-slate-950">BRL (R$)</TabsTrigger>
+                  <TabsTrigger value="USD" className="rounded-lg data-[state=active]:bg-white data-[state=active]:text-slate-950">USD (US$)</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
+          </div>
         </div>
       </header>
 
       <div className="p-6 md:p-10">
       <div className="max-w-7xl mx-auto space-y-6">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="mb-3 flex items-center gap-3">
-              <ComosLogo className="h-14 w-14 drop-shadow-sm" />
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.7fr)_minmax(320px,0.9fr)] xl:items-start">
+          <div className="rounded-[2rem] border border-border/70 bg-gradient-to-br from-white via-white to-slate-50/80 p-6 shadow-sm md:p-8">
+            <div className="mb-4 flex items-center gap-4">
+              <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#2BAAAB]/10 ring-1 ring-[#2BAAAB]/15">
+                <ComosLogo className="h-11 w-11 drop-shadow-sm" />
+              </div>
               <div>
                 <div className="text-xl font-extrabold tracking-brand text-[#2BAAAB]">COMOS</div>
-                <div className="text-xs text-slate-400 tracking-widest uppercase">by Siemens</div>
+                <div className="text-xs text-slate-400 tracking-[0.28em] uppercase">by Siemens</div>
               </div>
             </div>
             <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.24em] text-slate-400">
@@ -429,41 +464,47 @@ export default function ComosRoiCalculatorApp() {
               <span className="h-1 w-1 rounded-full bg-slate-300" aria-hidden="true" />
               <span>{t.roiCalculator}</span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{t.title}</h1>
-            <p className="text-slate-600 mt-2 max-w-3xl">{t.subtitle}</p>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">{t.title}</h1>
+            <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600 md:text-lg">{t.subtitle}</p>
           </div>
-          <div className="w-full md:w-[520px] space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
+
+          <Card className="rounded-[2rem] border border-border/70 shadow-sm">
+            <CardHeader className="border-b border-border/50 pb-4">
+              <CardTitle className="flex items-center gap-2 text-lg text-slate-700">
+                <Calculator className="h-5 w-5 text-[#2BAAAB]" />
+                {t.benchmarkScenario}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 pt-5">
+              <div className="rounded-2xl bg-secondary/60 p-4 text-sm leading-6 text-slate-600">
+                {t.autoBenchmarkDesc}
+              </div>
               <div>
-                <Label className="mb-2 block flex items-center gap-2"><Languages className="h-4 w-4" /> {t.language}</Label>
-                <Tabs value={language} onValueChange={(v) => setLanguage(v as LanguageKey)}>
-                  <TabsList className="grid grid-cols-2 w-full rounded-2xl h-12">
-                    <TabsTrigger value="pt" className="rounded-xl">{t.portuguese}</TabsTrigger>
-                    <TabsTrigger value="en" className="rounded-xl">{t.english}</TabsTrigger>
+                <Label className="mb-2 block text-slate-600">{t.benchmarkScenario}</Label>
+                <Tabs value={scenario} onValueChange={(v) => setScenario(v as ScenarioKey)}>
+                  <TabsList className="grid h-auto w-full grid-cols-3 rounded-2xl">
+                    <TabsTrigger value="conservador" className="rounded-xl">{t.conservative}</TabsTrigger>
+                    <TabsTrigger value="base" className="rounded-xl">{t.base}</TabsTrigger>
+                    <TabsTrigger value="agressivo" className="rounded-xl">{t.aggressive}</TabsTrigger>
                   </TabsList>
                 </Tabs>
               </div>
-              <div>
-                <Label className="mb-2 block">{t.currency}</Label>
-                <Tabs value={currency} onValueChange={(v) => setCurrency(v as CurrencyKey)}>
-                  <TabsList className="grid grid-cols-2 w-full rounded-2xl h-12">
-                    <TabsTrigger value="BRL" className="rounded-xl">BRL (R$)</TabsTrigger>
-                    <TabsTrigger value="USD" className="rounded-xl">USD (US$)</TabsTrigger>
-                  </TabsList>
-                </Tabs>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div className="rounded-2xl border border-border/70 bg-white p-4">
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{t.engPerUser}</div>
+                  <div className="mt-2 text-2xl font-semibold text-slate-900">
+                    {benchmarkHoursPerUserMonth.engineering} <span className="text-sm font-medium text-slate-500">{t.hoursMonth}</span>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-border/70 bg-white p-4">
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">{t.infoPerUser}</div>
+                  <div className="mt-2 text-2xl font-semibold text-slate-900">
+                    {benchmarkHoursPerUserMonth.info} <span className="text-sm font-medium text-slate-500">{t.hoursMonth}</span>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div>
-              <Label className="mb-2 block">{t.benchmarkScenario}</Label>
-              <Tabs value={scenario} onValueChange={(v) => setScenario(v as ScenarioKey)}>
-                <TabsList className="grid grid-cols-3 w-full rounded-2xl h-12">
-                  <TabsTrigger value="conservador" className="rounded-xl">{t.conservative}</TabsTrigger>
-                  <TabsTrigger value="base" className="rounded-xl">{t.base}</TabsTrigger>
-                  <TabsTrigger value="agressivo" className="rounded-xl">{t.aggressive}</TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
