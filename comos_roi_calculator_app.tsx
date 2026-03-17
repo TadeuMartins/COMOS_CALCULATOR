@@ -725,7 +725,7 @@ function resolveSourceUrl(url: string) {
   try {
     const parsedUrl = new URL(url);
     if (parsedUrl.hostname.toLowerCase() === "assets.new.siemens.com") {
-      return `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(url)}`;
+      return url;
     }
     return url;
   } catch {
