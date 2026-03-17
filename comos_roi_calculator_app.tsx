@@ -289,9 +289,9 @@ export default function ComosRoiCalculatorApp() {
     const annualInfoHours = effectiveInfoHoursMonth * 12;
     const annualEngineeringCost = annualEngineeringHours * hourCost;
     const annualReworkCost = annualEngineeringCost * (reworkPct / 100);
-    const annualProductiveEngineeringCost = Math.max(annualEngineeringCost - annualReworkCost, 0);
+    const annualNonReworkEngineeringCost = Math.max(annualEngineeringCost - annualReworkCost, 0);
 
-    const engineeringSavings = annualProductiveEngineeringCost * preset.engineeringGain;
+    const engineeringSavings = annualNonReworkEngineeringCost * preset.engineeringGain;
     const reworkSavings = annualReworkCost * preset.reworkReduction;
 
     const monthlyInfoHoursPerUser = (preset.infoHoursPerWeek * 52) / 12;
