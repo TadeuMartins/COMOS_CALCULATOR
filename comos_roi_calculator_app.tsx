@@ -447,9 +447,9 @@ export default function ComosRoiCalculatorApp() {
       </header>
 
       <div className="p-6 md:p-10">
-      <div className="max-w-7xl mx-auto space-y-6">
+      <div className="mx-auto w-full max-w-5xl space-y-6">
         <div className="space-y-4">
-          <div className="mx-auto w-full max-w-5xl rounded-[2rem] border border-border/70 bg-gradient-to-br from-white via-white to-slate-50/80 p-6 shadow-sm md:p-8">
+          <div className="w-full rounded-[2rem] border border-border/70 bg-gradient-to-br from-white via-white to-slate-50/80 p-6 shadow-sm md:p-8">
             <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.24em] text-slate-400">
               <span className="text-[#2BAAAB]">{t.businessCase}</span>
               <span className="h-1 w-1 rounded-full bg-slate-300" aria-hidden="true" />
@@ -461,7 +461,7 @@ export default function ComosRoiCalculatorApp() {
 
           <section
             aria-label={t.benchmarkScenario}
-            className="mx-auto w-full max-w-4xl rounded-[2rem] border border-border/70 bg-white/90 p-5 shadow-sm"
+            className="w-full rounded-[2rem] border border-border/70 bg-white/90 p-5 shadow-sm"
           >
             <Label className="mb-2 block text-slate-600">{t.benchmarkScenario}</Label>
             <Tabs value={scenario} onValueChange={(v) => setScenario(v as ScenarioKey)}>
