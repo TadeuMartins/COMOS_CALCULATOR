@@ -721,6 +721,18 @@ function isSiemensSource(url: string) {
   }
 }
 
+function resolveSourceUrl(url: string) {
+  try {
+    const parsedUrl = new URL(url);
+    if (parsedUrl.hostname.toLowerCase() === "assets.new.siemens.com") {
+      return `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(url)}`;
+    }
+    return url;
+  } catch {
+    return url;
+  }
+}
+
 function SourceList({
   sources,
   itemTitle,
@@ -752,7 +764,7 @@ function SourceList({
             {group.items.map((source) => (
               <li key={source.url}>
                 <a
-                  href={source.url}
+                  href={resolveSourceUrl(source.url)}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`${itemTitle}: ${group.label} — ${source.label}`}
