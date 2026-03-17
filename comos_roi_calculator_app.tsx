@@ -85,8 +85,8 @@ const scenarioPresets = {
     infoHoursPerWeek: 1.0,
   },
   agressivo: {
-    engineeringGain: 0.12,
-    reworkReduction: 0.25,
+    engineeringGain: 0.1,
+    reworkReduction: 0.2,
     infoHoursPerWeek: 2.0,
   },
 } as const;
@@ -170,18 +170,29 @@ export default function ComosRoiCalculatorApp() {
       engineeringProductivity: "Produtividade de engenharia",
       reworkReduction: "Redução de retrabalho",
       searchValidation: "Busca e validação de informação",
-      assumptionsTitle: "Premissas de conversão do cenário",
-      methodology: "Metodologia resumida",
+      assumptionsTitle: "Premissas, racional e referências",
+      assumptionsIntro:
+        "As fontes externas sustentam o benchmark principal dos números; as fontes Siemens reforçam a aderência específica ao COMOS.",
+      methodology: "Metodologia e coerência dos cálculos",
       p1: "Esta calculadora usa três drivers gerais de valor: ganho de produtividade em engenharia, redução de retrabalho e redução do tempo gasto buscando ou validando informação técnica.",
-      p2: "O objetivo é oferecer uma estimativa executiva simples para business case, sem depender de um diagnóstico detalhado do cliente. Os fatores variam conforme o cenário selecionado.",
-      p3: "No modo benchmark automático, as horas mensais são estimadas a partir do número de usuários impactados. Você ainda pode desligar esse modo para inserir valores reais do cliente quando tiver dados melhores.",
-      p4: "Para uma versão mais robusta, você pode complementar o app com evidências internas, benchmark do setor e ganhos adicionais de handover, operação e manutenção.",
+      p2: "As premissas-base foram mantidas em 8% de ganho de produtividade, 15% de redução do retrabalho atual e 1 h/semana por usuário em busca/validação recuperada, por estarem coerentes e conservadoras frente ao conjunto das fontes externas.",
+      p3: "Para evitar dupla contagem, o ganho de produtividade de engenharia é aplicado apenas sobre a parcela produtiva da base anual de engenharia, excluindo o retrabalho atual estimado.",
+      p4: "A redução de retrabalho é aplicada somente sobre o custo anual de retrabalho atual estimado, e a economia com busca/validação é limitada pela linha de base de horas já informada no modelo.",
+      p5: "No modo benchmark automático, as horas mensais são estimadas a partir do número de usuários impactados. Você ainda pode desligar esse modo para inserir valores reais do cliente quando tiver dados melhores.",
+      p6: "Para uma versão mais robusta, você pode complementar o app com evidências internas, benchmark do setor e ganhos adicionais de handover, operação e manutenção.",
       a1: "Ganho de produtividade em engenharia",
-      a1n: "Baseado em racional de engenharia digital integrada e benchmark de cenário.",
+      a1n: "8% no cenário base é moderado a conservador frente às referências externas e ao benchmark Siemens.",
       a2: "Redução de retrabalho",
-      a2n: "Aplicado sobre o custo anual estimado de retrabalho atual.",
+      a2n: "15% no cenário base é aplicado somente sobre o retrabalho atual estimado, e não sobre o custo total do projeto.",
       a3: "Redução de tempo de busca/validação",
-      a3n: "Conversão geral para eficiência na localização e validação da informação.",
+      a3n: "1 h/semana por usuário no cenário base é uma hipótese prudente frente às referências externas.",
+      externalBasisLabel: "Base externa",
+      siemensBasisLabel: "Base Siemens",
+      rationaleLabel: "Leitura técnica",
+      confidenceLabel: "Nível de confiança",
+      recommendedRangeLabel: "Faixa recomendada",
+      externalSourcesLabel: "Fontes externas",
+      siemensSourcesLabel: "Fontes Siemens",
       hoursWeekUser: "h/semana por usuário",
       hoursMonth: "h/mês",
       portuguese: "Português",
@@ -233,18 +244,29 @@ export default function ComosRoiCalculatorApp() {
       engineeringProductivity: "Engineering productivity",
       reworkReduction: "Rework reduction",
       searchValidation: "Search and information validation",
-      assumptionsTitle: "Scenario conversion assumptions",
-      methodology: "Methodology summary",
+      assumptionsTitle: "Assumptions, rationale, and references",
+      assumptionsIntro:
+        "External sources are the primary benchmark basis for the numbers; Siemens sources show COMOS-specific alignment.",
+      methodology: "Methodology and calculation coherence",
       p1: "This calculator uses three general value drivers: engineering productivity gain, rework reduction, and reduced time spent searching for or validating technical information.",
-      p2: "The goal is to provide a simple executive estimate for a business case without depending on a detailed client diagnosis. Factors vary according to the selected scenario.",
-      p3: "In automatic benchmark mode, monthly hours are estimated from the number of impacted users. You can still turn this mode off to enter actual client values when better data is available.",
-      p4: "For a more robust version, you can complement the app with internal evidence, industry benchmarks, and additional handover, operations, and maintenance gains.",
+      p2: "The base assumptions remain 8% engineering productivity gain, 15% reduction of current rework, and 1 hour/week per user of recovered search/validation time because they are coherent and conservative against the external evidence set.",
+      p3: "To avoid double counting, the engineering productivity gain is applied only to the productive portion of the annual engineering baseline, excluding the currently estimated rework.",
+      p4: "Rework reduction is applied only to the estimated current annual rework cost, and search/validation savings are capped by the baseline search/validation hours already entered in the model.",
+      p5: "In automatic benchmark mode, monthly hours are estimated from the number of impacted users. You can still turn this mode off to enter actual client values when better data is available.",
+      p6: "For a more robust version, you can complement the app with internal evidence, industry benchmarks, and additional handover, operations, and maintenance gains.",
       a1: "Engineering productivity gain",
-      a1n: "Based on integrated digital engineering rationale and scenario benchmark.",
+      a1n: "8% in the base scenario is moderate to conservative against the external literature and Siemens benchmark evidence.",
       a2: "Rework reduction",
-      a2n: "Applied to the estimated current annual rework cost.",
+      a2n: "15% in the base scenario is applied only to estimated current rework, not to the total project cost.",
       a3: "Search/validation time reduction",
-      a3n: "General conversion for efficiency in finding and validating information.",
+      a3n: "1 hour/week per user in the base scenario is a prudent assumption versus the external references.",
+      externalBasisLabel: "External basis",
+      siemensBasisLabel: "Siemens basis",
+      rationaleLabel: "Technical reading",
+      confidenceLabel: "Confidence level",
+      recommendedRangeLabel: "Recommended range",
+      externalSourcesLabel: "External sources",
+      siemensSourcesLabel: "Siemens sources",
       hoursWeekUser: "h/week per user",
       hoursMonth: "h/month",
       portuguese: "Português",
@@ -267,8 +289,9 @@ export default function ComosRoiCalculatorApp() {
     const annualInfoHours = effectiveInfoHoursMonth * 12;
     const annualEngineeringCost = annualEngineeringHours * hourCost;
     const annualReworkCost = annualEngineeringCost * (reworkPct / 100);
+    const annualProductiveEngineeringCost = Math.max(annualEngineeringCost - annualReworkCost, 0);
 
-    const engineeringSavings = annualEngineeringCost * preset.engineeringGain;
+    const engineeringSavings = annualProductiveEngineeringCost * preset.engineeringGain;
     const reworkSavings = annualReworkCost * preset.reworkReduction;
 
     const monthlyInfoHoursPerUser = (preset.infoHoursPerWeek * 52) / 12;
@@ -307,14 +330,45 @@ export default function ComosRoiCalculatorApp() {
       title: t.a1,
       value: percent(scenarioPresets[scenario].engineeringGain * 100, locale),
       note: t.a1n,
-      sources: [
+      externalBasis:
+        language === "pt"
+          ? "A literatura de BIM e engenharia digital integrada mostra ganhos mensuráveis de produtividade, prazo e redução de mudanças/retrabalho quando os dados são estruturados e reutilizáveis."
+          : "BIM and integrated digital engineering literature shows measurable productivity, schedule, and change/rework benefits when data is structured and reusable.",
+      siemensBasis:
+        language === "pt"
+          ? "A Siemens documenta no COMOS economias de engenharia de 8% a 12% na Novartis e, em casos específicos, até 20% de redução do tempo de engenharia."
+          : "Siemens documents 8% to 12% engineering savings with COMOS at Novartis and, in specific use cases, up to 20% shorter engineering time.",
+      rationale:
+        language === "pt"
+          ? "Como benchmark-base, 8% permanece coerente e conservador. Mantivemos o cenário agressivo em 10% para refletir melhor a faixa externa recomendada."
+          : "As a base benchmark, 8% remains coherent and conservative. The aggressive scenario was set to 10% to better reflect the recommended external range.",
+      confidence: language === "pt" ? "Médio-alto" : "Medium-high",
+      benchmarkRange:
+        language === "pt"
+          ? "Faixa externa defensável: 5%–10%. Evidência Siemens: 8%–12%, com casos específicos acima disso."
+          : "Defensible external range: 5%–10%. Siemens evidence: 8%–12%, with specific cases above that.",
+      externalSources: [
         {
-          label: language === "pt" ? "Siemens COMOS: smart templates e single source of truth" : "Siemens COMOS: smart templates and single source of truth",
-          url: "https://www.siemens.com/en-us/products/comos/",
+          label: language === "pt" ? "Chalmers systematic review sobre quantificação de valor em BIM" : "Chalmers systematic review on quantifying BIM investment value",
+          url: "https://research.chalmers.se/publication/540280/file/540280_Fulltext.pdf",
         },
         {
-          label: language === "pt" ? "Siemens COMOS Modularized Engineering" : "Siemens COMOS Modularized Engineering",
-          url: "https://www.siemens.com/en-us/products/comos/modularized-engineering/",
+          label: language === "pt" ? "ScienceDirect 2024 sobre influência do BIM em tempo e custo" : "ScienceDirect 2024 on BIM influence on time and cost",
+          url: "https://www.sciencedirect.com/science/article/pii/S2590123024008107",
+        },
+      ],
+      siemensSources: [
+        {
+          label: language === "pt" ? "COMOS brochure com caso Novartis (8%–12% engineering savings)" : "COMOS brochure with Novartis case (8%–12% engineering savings)",
+          url: "https://support.industry.siemens.com/cs/attachments/109765354/COMOS_Imagebroschuere_EN.pdf",
+        },
+        {
+          label: language === "pt" ? "Making Water Work (até 20% shorter engineering time)" : "Making Water Work (up to 20% shorter engineering time)",
+          url: "https://assets.new.siemens.com/siemens/assets/api/uuid%3A5be03374-4417-418a-afaa-2e80517b9ca7/pibr-b10020-0320-making-water-work.pdf",
+        },
+        {
+          label: language === "pt" ? "COMOS for EPC (engineering workflows accelerated)" : "COMOS for EPC (engineering workflows accelerated)",
+          url: "https://assets.new.siemens.com/siemens/assets/api/uuid%3A36e6fda0-c1ee-4c93-83f8-caaa477ac03d/sie-onepager-comos-for-epc-en-iedit-v260618.pdf",
         },
       ],
     },
@@ -322,14 +376,49 @@ export default function ComosRoiCalculatorApp() {
       title: t.a2,
       value: percent(scenarioPresets[scenario].reworkReduction * 100, locale),
       note: t.a2n,
-      sources: [
+      externalBasis:
+        language === "pt"
+          ? "Estudos de interoperabilidade, rework em projetos e coordenação digital mostram que dados ruins, fragmentação e falhas de comunicação são causas recorrentes de retrabalho."
+          : "Interoperability, project rework, and digital coordination studies show that poor data, fragmentation, and communication failures are recurring rework drivers.",
+      siemensBasis:
+        language === "pt"
+          ? "A Siemens conecta o COMOS a dados consistentes e sempre atualizados, menos erros, menos rework e comissionamento mais rápido."
+          : "Siemens links COMOS to always up-to-date consistent data, fewer errors, less rework, and faster commissioning.",
+      rationale:
+        language === "pt"
+          ? "15% de redução sobre o retrabalho atual estimado segue coerente e moderado. O cenário agressivo foi ajustado para 20% para manter aderência à faixa externa principal."
+          : "A 15% reduction on currently estimated rework remains coherent and moderate. The aggressive scenario was adjusted to 20% to stay aligned with the main external range.",
+      confidence: language === "pt" ? "Alto" : "High",
+      benchmarkRange:
+        language === "pt"
+          ? "Faixa recomendada sobre o retrabalho atual: 10%–20%."
+          : "Recommended range on current rework: 10%–20%.",
+      externalSources: [
         {
-          label: language === "pt" ? "Siemens COMOS Portfolio: compress schedules and cut rework" : "Siemens COMOS Portfolio: compress schedules and cut rework",
-          url: "https://www.siemens.com/en-us/products/comos/portfolio/",
+          label: language === "pt" ? "NIST sobre custo de interoperabilidade inadequada" : "NIST on the cost of inadequate interoperability",
+          url: "https://nvlpubs.nist.gov/nistpubs/gcr/2004/nist.gcr.04-867.pdf",
         },
         {
-          label: language === "pt" ? "McKinsey: digital transformation in capital projects" : "McKinsey: digital transformation in capital projects",
-          url: "https://www.mckinsey.com/~/media/McKinsey/Industries/Capital%20Projects%20and%20Infrastructure/Our%20Insights/Navigating%20the%20digital%20future%20The%20disruption%20of%20capital%20projects/Navigating-the-digital-future-The-disruption-of-capital-projects.pdf",
+          label: language === "pt" ? "Love, Irani e Edwards sobre rework como problema endêmico" : "Love, Irani, and Edwards on rework as an endemic problem",
+          url: "https://bura.brunel.ac.uk/bitstream/2438/1730/1/01347434.pdf",
+        },
+        {
+          label: language === "pt" ? "MDPI 2020 sobre redução de horas acumuladas com BIM" : "MDPI 2020 on reduced cumulative hours with BIM",
+          url: "https://www.mdpi.com/2071-1050/12/21/8927",
+        },
+        {
+          label: language === "pt" ? "PlanGrid/FMI sobre retrabalho ligado a dados ruins e má comunicação" : "PlanGrid/FMI on rework caused by bad data and miscommunication",
+          url: "https://pg.plangrid.com/rs/572-JSV-775/images/Construction_Disconnected.pdf",
+        },
+      ],
+      siemensSources: [
+        {
+          label: language === "pt" ? "COMOS for EPC (reduction of errors and reworking)" : "COMOS for EPC (reduction of errors and reworking)",
+          url: "https://assets.new.siemens.com/siemens/assets/api/uuid%3A36e6fda0-c1ee-4c93-83f8-caaa477ac03d/sie-onepager-comos-for-epc-en-iedit-v260618.pdf",
+        },
+        {
+          label: language === "pt" ? "COMOS Process (eliminação de entradas manuais e checagens demoradas)" : "COMOS Process (elimination of manual entry and time-consuming checks)",
+          url: "https://assets.new.siemens.com/siemens/assets/api/uuid%3Ac9dcb8d2-4fdb-4bb7-88b6-820b5835e12e/comos-process-en.pdf",
         },
       ],
     },
@@ -337,14 +426,45 @@ export default function ComosRoiCalculatorApp() {
       title: t.a3,
       value: `${numberFmt(scenarioPresets[scenario].infoHoursPerWeek, locale, 1)} ${t.hoursWeekUser}`,
       note: t.a3n,
-      sources: [
+      externalBasis:
+        language === "pt"
+          ? "McKinsey, Deloitte e pesquisas recentes mostram que profissionais gastam uma parcela relevante da semana procurando, validando ou reconciliando informação."
+          : "McKinsey, Deloitte, and recent surveys show that professionals spend a meaningful share of the week searching for, validating, or reconciling information.",
+      siemensBasis:
+        language === "pt"
+          ? "A Siemens posiciona o COMOS como base comum de dados, single source of truth e fluxo contínuo de informação ao longo do ciclo de vida."
+          : "Siemens positions COMOS as a common data foundation, a single source of truth, and a seamless information flow across the lifecycle.",
+      rationale:
+        language === "pt"
+          ? "1 h/semana por usuário segue bastante conservadora diante das referências externas, que sugerem economias potenciais bem maiores em ambientes mais fragmentados."
+          : "1 hour/week per user remains highly conservative against the external references, which suggest materially larger potential savings in more fragmented environments.",
+      confidence: language === "pt" ? "Alto" : "High",
+      benchmarkRange:
+        language === "pt"
+          ? "Faixa externa defensável: 1–3 h/semana por usuário, com 1 h/semana mantida como ponto central prudente."
+          : "Defensible external range: 1–3 hours/week per user, with 1 hour/week kept as the prudent midpoint.",
+      externalSources: [
         {
-          label: language === "pt" ? "McKinsey: knowledge workers and search time" : "McKinsey: knowledge workers and search time",
-          url: "https://www.mckinsey.com/~/media/mckinsey/dotcom/client_service/high%20tech/pdfs/impact_of_internet_technologies_search_final2.ashx",
+          label: language === "pt" ? "McKinsey The Social Economy" : "McKinsey The Social Economy",
+          url: "https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/the-social-economy",
         },
         {
-          label: language === "pt" ? "McKinsey: social technologies and time recovered" : "McKinsey: social technologies and time recovered",
-          url: "https://www.mckinsey.com/~/media/mckinsey/industries/technology%20media%20and%20telecommunications/high%20tech/our%20insights/the%20social%20economy/mgi_the_social_economy_full_report.pdf",
+          label: language === "pt" ? "McKinsey Capturing business value with social technologies" : "McKinsey Capturing business value with social technologies",
+          url: "https://www.mckinsey.com/~/media/McKinsey/Industries/Technology%20Media%20and%20Telecommunications/High%20Tech/Our%20Insights/Capturing%20business%20value%20with%20social%20technologies/Capturing%20business%20value%20with%20social%20technologies.pdf",
+        },
+        {
+          label: language === "pt" ? "Deloitte Access Economics 2025 sobre adoção digital na construção" : "Deloitte Access Economics 2025 on digital adoption in construction",
+          url: "https://www.deloitte.com/au/en/services/economics/analysis/state-digital-adoption-construction-industry.html",
+        },
+      ],
+      siemensSources: [
+        {
+          label: language === "pt" ? "COMOS Lifecycle (common database e seamless flow of information)" : "COMOS Lifecycle (common database and seamless flow of information)",
+          url: "https://siemens.ebene1.org/comos-lifecycle/pdf/comos_lifecycle_en.pdf",
+        },
+        {
+          label: language === "pt" ? "COMOS brochure (making data work e single source of truth)" : "COMOS brochure (making data work and single source of truth)",
+          url: "https://support.industry.siemens.com/cs/attachments/109765354/COMOS_Imagebroschuere_EN.pdf",
         },
       ],
     },
@@ -532,26 +652,23 @@ export default function ComosRoiCalculatorApp() {
                 <CardTitle className="flex items-center gap-2 text-lg text-slate-700"><RefreshCcw className="h-5 w-5 text-[#2BAAAB]" /> {t.assumptionsTitle}</CardTitle>
               </CardHeader>
               <CardContent className="pt-5">
+                <p className="mb-4 text-sm text-slate-600">{t.assumptionsIntro}</p>
                 <div className="grid md:grid-cols-3 gap-4">
                   {assumptions.map((item) => (
-                    <div key={item.title} className="rounded-2xl border border-border p-4 bg-secondary/30">
+                    <div key={item.title} className="rounded-2xl border border-border p-4 bg-secondary/30 space-y-4">
                       <div className="text-sm text-muted-foreground mb-1">{item.title}</div>
                       <div className="text-2xl font-semibold text-[#2BAAAB]">{item.value}</div>
                       <p className="text-sm text-slate-600 mt-2">{item.note}</p>
-                      <div className="mt-3 flex items-center gap-2">
-                        {item.sources.map((source, index) => (
-                          <a
-                            key={source.url}
-                            href={source.url}
-                            target="_blank"
-                            rel="noreferrer"
-                            aria-label={`${item.title} source ${index + 1}`}
-                            title={source.label}
-                            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-                          >
-                            <Link2 className="h-4 w-4" />
-                          </a>
-                        ))}
+                      <div className="space-y-3 text-sm text-slate-600">
+                        <InfoBlock label={t.externalBasisLabel} text={item.externalBasis} />
+                        <InfoBlock label={t.siemensBasisLabel} text={item.siemensBasis} />
+                        <InfoBlock label={t.rationaleLabel} text={item.rationale} />
+                        <InfoBlock label={t.confidenceLabel} text={item.confidence} />
+                        <InfoBlock label={t.recommendedRangeLabel} text={item.benchmarkRange} />
+                      </div>
+                      <div className="space-y-3">
+                        <SourceList title={t.externalSourcesLabel} sources={item.externalSources} itemTitle={item.title} />
+                        <SourceList title={t.siemensSourcesLabel} sources={item.siemensSources} itemTitle={item.title} />
                       </div>
                     </div>
                   ))}
@@ -568,6 +685,8 @@ export default function ComosRoiCalculatorApp() {
                 <p>{t.p2}</p>
                 <p>{t.p3}</p>
                 <p>{t.p4}</p>
+                <p>{t.p5}</p>
+                <p>{t.p6}</p>
               </CardContent>
             </Card>
           </div>
@@ -656,6 +775,47 @@ function BenefitBar({ label, value, total, currency, locale }: { label: string; 
       <div className="w-full h-3 rounded-full bg-slate-100 overflow-hidden">
         <div className="h-full rounded-full bg-[#2BAAAB]" style={{ width: `${Math.max(0, Math.min(100, width))}%` }} />
       </div>
+    </div>
+  );
+}
+
+function InfoBlock({ label, text }: { label: string; text: string }) {
+  return (
+    <div>
+      <div className="font-medium text-slate-700">{label}</div>
+      <p>{text}</p>
+    </div>
+  );
+}
+
+function SourceList({
+  title,
+  sources,
+  itemTitle,
+}: {
+  title: string;
+  sources: Array<{ label: string; url: string }>;
+  itemTitle: string;
+}) {
+  return (
+    <div>
+      <div className="mb-2 text-sm font-medium text-slate-700">{title}</div>
+      <ul className="space-y-2 text-sm">
+        {sources.map((source, index) => (
+          <li key={source.url}>
+            <a
+              href={source.url}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${itemTitle} source ${index + 1}`}
+              className="inline-flex items-start gap-2 text-slate-700 underline decoration-slate-300 underline-offset-4 transition hover:text-slate-900"
+            >
+              <Link2 className="mt-0.5 h-4 w-4 shrink-0" />
+              <span>{source.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
