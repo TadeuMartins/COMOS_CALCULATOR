@@ -323,14 +323,6 @@ export default function ComosRoiCalculatorApp() {
           label: language === "pt" ? "COMOS brochure com caso Novartis (8%–12% engineering savings)" : "COMOS brochure with Novartis case (8%–12% engineering savings)",
           url: "https://support.industry.siemens.com/cs/attachments/109765354/COMOS_Imagebroschuere_EN.pdf",
         },
-        {
-          label: language === "pt" ? "Making Water Work (até 20% shorter engineering time)" : "Making Water Work (up to 20% shorter engineering time)",
-          url: "https://assets.new.siemens.com/siemens/assets/api/uuid%3A5be03374-4417-418a-afaa-2e80517b9ca7/pibr-b10020-0320-making-water-work.pdf",
-        },
-        {
-          label: language === "pt" ? "COMOS for EPC (engineering workflows accelerated)" : "COMOS for EPC (engineering workflows accelerated)",
-          url: "https://assets.new.siemens.com/siemens/assets/api/uuid%3A36e6fda0-c1ee-4c93-83f8-caaa477ac03d/sie-onepager-comos-for-epc-en-iedit-v260618.pdf",
-        },
       ],
     },
     {
@@ -358,12 +350,11 @@ export default function ComosRoiCalculatorApp() {
           url: "https://pg.plangrid.com/rs/572-JSV-775/images/Construction_Disconnected.pdf",
         },
         {
-          label: language === "pt" ? "COMOS for EPC (reduction of errors and reworking)" : "COMOS for EPC (reduction of errors and reworking)",
-          url: "https://assets.new.siemens.com/siemens/assets/api/uuid%3A36e6fda0-c1ee-4c93-83f8-caaa477ac03d/sie-onepager-comos-for-epc-en-iedit-v260618.pdf",
-        },
-        {
-          label: language === "pt" ? "COMOS Process (eliminação de entradas manuais e checagens demoradas)" : "COMOS Process (elimination of manual entry and time-consuming checks)",
-          url: "https://assets.new.siemens.com/siemens/assets/api/uuid%3Ac9dcb8d2-4fdb-4bb7-88b6-820b5835e12e/comos-process-en.pdf",
+          label:
+            language === "pt"
+              ? "COMOS brochure (base integrada para reduzir inconsistências e retrabalho)"
+              : "COMOS brochure (integrated data foundation to reduce inconsistencies and rework)",
+          url: "https://support.industry.siemens.com/cs/attachments/109765354/COMOS_Imagebroschuere_EN.pdf",
         },
       ],
     },
@@ -388,11 +379,10 @@ export default function ComosRoiCalculatorApp() {
           url: "https://www.deloitte.com/au/en/services/economics/analysis/state-digital-adoption-construction-industry.html",
         },
         {
-          label: language === "pt" ? "COMOS Lifecycle (common database e seamless flow of information)" : "COMOS Lifecycle (common database and seamless flow of information)",
-          url: "https://siemens.ebene1.org/comos-lifecycle/pdf/comos_lifecycle_en.pdf",
-        },
-        {
-          label: language === "pt" ? "COMOS brochure (making data work e single source of truth)" : "COMOS brochure (making data work and single source of truth)",
+          label:
+            language === "pt"
+              ? "COMOS brochure (single source of truth e fluxo contínuo da informação)"
+              : "COMOS brochure (single source of truth and continuous flow of information)",
           url: "https://support.industry.siemens.com/cs/attachments/109765354/COMOS_Imagebroschuere_EN.pdf",
         },
       ],
@@ -722,15 +712,7 @@ function isSiemensSource(url: string) {
 }
 
 function resolveSourceUrl(url: string) {
-  try {
-    const parsedUrl = new URL(url);
-    if (parsedUrl.hostname.toLowerCase() === "assets.new.siemens.com") {
-      return url;
-    }
-    return url;
-  } catch {
-    return url;
-  }
+  return url;
 }
 
 function SourceList({
