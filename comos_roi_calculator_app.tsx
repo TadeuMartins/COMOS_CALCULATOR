@@ -700,24 +700,22 @@ function SourceList({
   itemTitle: string;
 }) {
   return (
-    <div>
-      <div className="mb-2 text-sm font-medium text-slate-700">{title}</div>
-      <ul className="space-y-2 text-sm">
+    <ul className="flex flex-wrap gap-2" aria-label={title}>
         {sources.map((source, index) => (
           <li key={source.url}>
             <a
               href={source.url}
               target="_blank"
               rel="noreferrer"
-              aria-label={`${itemTitle} source ${index + 1}`}
-              className="inline-flex items-start gap-2 text-slate-700 underline decoration-slate-300 underline-offset-4 transition hover:text-slate-900"
+              aria-label={`${itemTitle} — ${title}: ${source.label}`}
+              title={source.label}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
             >
-              <Link2 className="mt-0.5 h-4 w-4 shrink-0" />
-              <span>{source.label}</span>
+              <Link2 className="h-4 w-4 shrink-0" />
+              <span className="sr-only">{source.label}</span>
             </a>
           </li>
         ))}
       </ul>
-    </div>
   );
 }
