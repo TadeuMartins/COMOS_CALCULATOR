@@ -403,11 +403,11 @@ export default function ComosRoiCalculatorApp() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b border-white/10 bg-[#2BAAAB] px-6 py-4 text-white shadow-lg md:px-10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <header className="border-b border-white/10 bg-[#2BAAAB] px-5 py-3 text-white shadow-lg md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
-              <ComosLogo className="h-8 w-8" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15">
+              <ComosLogo className="h-7 w-7" />
             </div>
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
@@ -419,24 +419,24 @@ export default function ComosRoiCalculatorApp() {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:w-auto lg:min-w-[430px]">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
+          <div className="grid gap-2 sm:grid-cols-2 lg:w-auto lg:min-w-[390px]">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-2.5 backdrop-blur">
               <Label className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
                 <Languages className="h-4 w-4" />
                 {t.language}
               </Label>
               <Tabs value={language} onValueChange={(v) => setLanguage(v as LanguageKey)}>
-                <TabsList className="grid h-11 w-full grid-cols-2 rounded-xl bg-white/10 p-1 text-white/70">
+                <TabsList className="grid h-10 w-full grid-cols-2 rounded-xl bg-white/10 p-1 text-white/70">
                   <TabsTrigger value="pt" className="rounded-lg data-[state=active]:bg-white data-[state=active]:text-slate-950">{t.portuguese}</TabsTrigger>
                   <TabsTrigger value="en" className="rounded-lg data-[state=active]:bg-white data-[state=active]:text-slate-950">{t.english}</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-2.5 backdrop-blur">
               <Label className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-white/70">{t.currency}</Label>
               <Tabs value={currency} onValueChange={(v) => setCurrency(v as CurrencyKey)}>
-                <TabsList className="grid h-11 w-full grid-cols-2 rounded-xl bg-white/10 p-1 text-white/70">
+                <TabsList className="grid h-10 w-full grid-cols-2 rounded-xl bg-white/10 p-1 text-white/70">
                   <TabsTrigger value="BRL" className="rounded-lg data-[state=active]:bg-white data-[state=active]:text-slate-950">BRL (R$)</TabsTrigger>
                   <TabsTrigger value="USD" className="rounded-lg data-[state=active]:bg-white data-[state=active]:text-slate-950">USD (US$)</TabsTrigger>
                 </TabsList>
@@ -446,26 +446,26 @@ export default function ComosRoiCalculatorApp() {
         </div>
       </header>
 
-      <div className="p-6 md:p-10">
-      <div className="mx-auto w-full max-w-5xl space-y-6">
-        <div className="space-y-4">
-          <div className="w-full rounded-[2rem] border border-border/70 bg-gradient-to-br from-white via-white to-slate-50/80 p-6 shadow-sm md:p-8">
+      <div className="px-4 py-5 md:px-6 md:py-8 xl:px-8">
+      <div className="mx-auto w-full max-w-7xl space-y-5">
+        <div className="space-y-3">
+          <div className="w-full rounded-[1.75rem] border border-border/70 bg-gradient-to-br from-white via-white to-slate-50/80 p-5 shadow-sm md:p-6">
             <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px] font-medium uppercase tracking-[0.24em] text-slate-400">
               <span className="text-[#2BAAAB]">{t.businessCase}</span>
               <span className="h-1 w-1 rounded-full bg-slate-300" aria-hidden="true" />
               <span>{t.roiCalculator}</span>
             </div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">{t.title}</h1>
-            <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600 md:text-lg">{t.subtitle}</p>
+            <h1 className="text-2xl font-bold tracking-tight text-slate-950 md:text-3xl">{t.title}</h1>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600 md:text-base">{t.subtitle}</p>
           </div>
 
           <section
             aria-label={t.benchmarkScenario}
-            className="w-full rounded-[2rem] border border-border/70 bg-white/90 p-5 shadow-sm"
+            className="w-full rounded-[1.75rem] border border-border/70 bg-white/90 p-4 shadow-sm"
           >
-            <Label className="mb-2 block text-slate-600">{t.benchmarkScenario}</Label>
+            <Label className="mb-2 block text-sm text-slate-600">{t.benchmarkScenario}</Label>
             <Tabs value={scenario} onValueChange={(v) => setScenario(v as ScenarioKey)}>
-              <TabsList className="grid h-12 w-full grid-cols-3 rounded-2xl">
+              <TabsList className="grid h-11 w-full grid-cols-3 rounded-2xl">
                 <TabsTrigger value="conservador" className="rounded-xl">{t.conservative}</TabsTrigger>
                 <TabsTrigger value="base" className="rounded-xl">{t.base}</TabsTrigger>
                 <TabsTrigger value="agressivo" className="rounded-xl">{t.aggressive}</TabsTrigger>
