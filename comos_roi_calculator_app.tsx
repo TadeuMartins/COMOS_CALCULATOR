@@ -97,8 +97,8 @@ type CurrencyKey = "BRL" | "USD";
 function ComosLogo({ className = "h-16 w-16" }: { className?: string }) {
   return (
     <img
-      src="/COMOS_CALCULATOR/comos-logo.svg"
-      alt="COMOS logo"
+      src="/COMOS_CALCULATOR/contoso.png"
+      alt="Contoso logo"
       className={className}
     />
   );
