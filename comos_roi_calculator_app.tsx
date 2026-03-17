@@ -176,7 +176,6 @@ export default function ComosRoiCalculatorApp() {
       p3: "Para evitar dupla contagem, o ganho de produtividade de engenharia é aplicado apenas sobre a parcela produtiva da base anual de engenharia, excluindo o retrabalho atual estimado.",
       p4: "A redução de retrabalho é aplicada somente sobre o custo anual de retrabalho atual estimado, e a economia com busca/validação é limitada pela linha de base de horas já informada no modelo.",
       p5: "No modo benchmark automático, as horas mensais são estimadas a partir do número de usuários impactados. Você ainda pode desligar esse modo para inserir valores reais do cliente quando tiver dados melhores.",
-      p6: "Para uma versão mais robusta, você pode complementar o app com evidências internas, benchmark do setor e ganhos adicionais de handover, operação e manutenção.",
       a1: "Ganho de produtividade em engenharia",
       a2: "Redução de retrabalho",
       a3: "Redução de tempo de busca/validação",
@@ -240,7 +239,6 @@ export default function ComosRoiCalculatorApp() {
       p3: "To avoid double counting, the engineering productivity gain is applied only to the productive portion of the annual engineering baseline, excluding the currently estimated rework.",
       p4: "Rework reduction is applied only to the estimated current annual rework cost, and search/validation savings are capped by the baseline search/validation hours already entered in the model.",
       p5: "In automatic benchmark mode, monthly hours are estimated from the number of impacted users. You can still turn this mode off to enter actual client values when better data is available.",
-      p6: "For a more robust version, you can complement the app with internal evidence, industry benchmarks, and additional handover, operations, and maintenance gains.",
       a1: "Engineering productivity gain",
       a2: "Rework reduction",
       a3: "Search/validation time reduction",
@@ -622,7 +620,6 @@ export default function ComosRoiCalculatorApp() {
                 <p>{t.p3}</p>
                 <p>{t.p4}</p>
                 <p>{t.p5}</p>
-                <p>{t.p6}</p>
               </CardContent>
             </Card>
           </div>
