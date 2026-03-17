@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <clipPath id="globeClip">
+      <circle cx="120" cy="120" r="76"/>
+    </clipPath>
+    <radialGradient id="oceanGrad" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#1a8f90" stop-opacity="0.25"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Teal C arc: thick stroke, opens on the right (~300 degrees) -->
+  <!-- Arc from ~50deg to ~310deg going counter-clockwise (large-arc=1) -->
+  <!-- Start point at ~50deg: 120+105*cos(50°), 120-105*sin(50°) ≈ (187.5, 39.6) -->
+  <!-- End point at ~310deg: 120+105*cos(310°), 120-105*sin(310°) ≈ (187.5, 200.4) -->
+  <path
+    d="M 187.5 39.6 A 105 105 0 1 0 187.5 200.4"
+    stroke="#2BAAAB"
+    stroke-width="48"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Globe sphere (teal base) -->
+  <circle cx="120" cy="120" r="76" fill="#2BAAAB"/>
+
+  <!-- Globe: ocean gradient overlay to give depth -->
+  <circle cx="120" cy="120" r="76" fill="url(#oceanGrad)" clip-path="url(#globeClip)"/>
+
+  <!-- Latitude lines (subtle) -->
+  <ellipse cx="120" cy="120" rx="76" ry="28" stroke="white" stroke-width="0.9" fill="none" opacity="0.35" clip-path="url(#globeClip)"/>
+  <ellipse cx="120" cy="120" rx="76" ry="56" stroke="white" stroke-width="0.9" fill="none" opacity="0.25" clip-path="url(#globeClip)"/>
+  <line x1="44" y1="120" x2="196" y2="120" stroke="white" stroke-width="0.9" opacity="0.30" clip-path="url(#globeClip)"/>
+
+  <!-- Longitude lines (subtle) -->
+  <ellipse cx="120" cy="120" rx="30" ry="76" stroke="white" stroke-width="0.9" fill="none" opacity="0.28" clip-path="url(#globeClip)"/>
+  <ellipse cx="120" cy="120" rx="58" ry="76" stroke="white" stroke-width="0.9" fill="none" opacity="0.22" clip-path="url(#globeClip)"/>
+
+  <!-- Landmasses in white, stylised -->
+  <!-- Europe + Africa block -->
+  <path d="M115 57 C120 54 128 56 132 62 C137 68 136 76 133 82
+           C138 85 141 92 139 99 C137 106 132 109 128 112
+           C132 118 133 127 130 134 C126 142 119 146 114 142
+           C109 139 108 131 111 125 C107 121 105 114 107 108
+           C104 102 104 94 107 88 C105 81 106 73 110 67
+           C112 62 113 59 115 57 Z"
+        fill="white" opacity="0.85" clip-path="url(#globeClip)"/>
+
+  <!-- Greenland / Northern Europe -->
+  <path d="M106 58 C110 51 120 48 127 51 C134 55 136 62 132 68
+           C127 65 121 64 116 66 C111 65 107 62 106 58 Z"
+        fill="white" opacity="0.78" clip-path="url(#globeClip)"/>
+
+  <!-- Americas -->
+  <path d="M75 78 C80 72 88 70 93 73 C98 77 99 84 97 90
+           C101 92 104 98 102 105 C100 111 95 115 91 113
+           C88 118 88 126 85 131 C82 137 76 139 72 135
+           C68 131 70 124 73 119 C70 113 68 106 71 100
+           C69 93 70 85 75 78 Z"
+        fill="white" opacity="0.80" clip-path="url(#globeClip)"/>
+
+  <!-- Asia -->
+  <path d="M145 62 C152 57 161 58 165 64 C170 70 168 78 164 83
+           C169 86 172 93 169 100 C166 107 160 110 155 107
+           C151 111 149 118 145 117 C140 116 138 109 141 104
+           C138 99 137 92 140 86 C139 79 141 70 145 62 Z"
+        fill="white" opacity="0.75" clip-path="url(#globeClip)"/>
+
+  <!-- Australia -->
+  <path d="M156 135 C162 130 170 131 173 137 C176 143 173 151 167 154
+           C161 157 154 154 152 148 C150 142 152 138 156 135 Z"
+        fill="white" opacity="0.72" clip-path="url(#globeClip)"/>
+
+  <!-- South America -->
+  <path d="M84 125 C88 121 94 121 97 126 C100 131 99 138 95 142
+           C91 146 85 145 82 140 C79 135 80 129 84 125 Z"
+        fill="white" opacity="0.75" clip-path="url(#globeClip)"/>
+
+</svg>

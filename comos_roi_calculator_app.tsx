@@ -95,7 +95,15 @@ type ScenarioKey = keyof typeof scenarioPresets;
 type LanguageKey = "pt" | "en";
 type CurrencyKey = "BRL" | "USD";
 
-const comosLogoSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPgAAAEQCAYAAACdsblQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACxIAAAsSAdLdfvwAAGklSURBVHhe7X0JYBTHlfZw6EA3ICRxSBpxHxIIcxqwkYxPcEDYiWM7ayNtEodknSD+3U2yf/YPkE02aye7QI5dO9lYwt71lcQSxMZHbEvYgA3YlkBcQoAuDh2ARhfoAv73varq7hmNhAQ6pkf9jZ7q1atX1T3T9XUdXd096Pr16zYL3omCisrE2qbmsLLaWnu5o9YO2+HKqlm1TVfCoJeRrcxRx/abRUxYSElMWGgJ9FD/YY74yIiD0KPJFhMaWhLq7+dIiIrMh81C38MiuMkhSFpr31NalkQkji2rddgLKqqJ2E1MYk9BqL8/EX1UfkxoWAmRv3RxbEwuTgzq5GChd2AR3ERAi1xQWZV4pKJqVkFlReLukvIkmWRqLLFH5yZERuXPiIo4mBAZkW+1+D0Hi+AejN0lZUlomfeUli71xFa5t6Ba+8WxsbvQ0i+xx+TKJAvdhEVwDwJa6J2FRSkgtLe0zj0FtPIPTJm8fQkR3mrhuw6L4P0ItMhopd8uLFr1FhF7oLTQtwq08CumTMp+YMqk7WjdEZdJFlxgEbyPARKDzEzq4ydSpNnCLWDF1MlMdpDeIrszLIL3ASxS9x0ssjvDIngvAmQGqV8+WJAqTRb6CKob/+ishG0DeZLOIngPA9ekXyFCv3Lw0JpbXURioWeAxTjfWjBv6+OzEjIHWqtuEbwHgMmyVw8WrLFaa88GSD6QWnWL4LcIEPr5fZ+twyUuabJgAuBS27cWzOVWXZq8EhbBbwKYNHtu32fpVjfc/PD27rtF8G5AEZtknXXN2rsAcq+lFp1kizcR3SJ4F2ARe+DA24huEbwTWMQeuPAWolsE7wCYPPvRux9stog9sIEx+veX3rHJrJNxFsFdgMtdT+94M8OaPLNgBGbdf3bvsvVmu7xmEVwCC1RAbOsuLgudAUthQXSzPKhiwBNcjbOf2bV7gzRZsNAp1Pj8B0uXbJQmj8WAJrjVHbdwK8D4/DcrH0zz5G77gCQ4Wu2nd+zMsO7sstATwATcz+5btt4TZ9sHHMFBapDbmh230JMAuX+zcnkaxujS5BEYMAS3Wm0LfQEQHET3lNZ8QBAcY+0nXn8jy2q1LfQFPGls7vUEx2KV/9p3IF1GLVjoM3x7wbwtGJvLaL/AawmO2zfRJbdu47TQn8ACmZceeWh1f10390qCW8tMLXgS+nMCzusIbnXJLXgq+qPL7jUER2u98sVXcqwuuQVPBl7g8NIjD6/uq1l2ryA4SA1yW11yC2YAZtlB8r54Q8tgGZoWGG9b5LZgJmBpNOpsXzyg09Qt+DO7dm+0bhKxYGZgTI6xuYz2OExL8Ke3v5XRF2dACxZ6G1jL/ptVK9JktEdhOoKjK/7E63/Osu7btuBN6K3JN1MR3Jopt+DNwKTbjicfS+5Jkptmks0itwVvR29cDTJFC25dBrMwkIAWHC15T1xG8/gW3CK3hYGGnuytenQLbpHbwkAGWvJdT6XNvpUbVTy2BbfIbWGgA+83v9W70DyS4Ba5LQx09NS1cY/rooPUib96rtgit4WBip5c+OJRLThIbbXcFgYyenpVm8e04IrcPTFzaKF7wGROQtSobl2SsVYS9jx6Y8mqxxB85Yv/m2NVmt4BlkGG+g9zxEdGHIwOCy2JCQ0tCfX3I1L3zO2KeKglwoLKysS6puawPaWlS2ubWsKsk3XX0Vvr0T2C4NaNIz0HkHlxbOwuInM+CNzf79ACyQsqqxKPVFTN2l1almSRvj16i9xAvxPcuuXz5oGuNR7Nuyg2eteS2JjcvniAQE8ALf4eIvvOwqJVA53wvUluoF8JjlYbrbeMWugC8DSQFVOmZD8wZdJ2s73K1h0w9/JWYVHK3pKypQgH0gRrb5Mb6DeC48xtzZh3DYrUj86K32aWVvpmgTfPvE0tu7eTvS/IDfQLwXHgrGvdnQPdb6xk+taCuVu9ndQdAWR/9dDhNd72uqm+IjfQLwRf+ruMPGuyxT1AZpAa5AbJpXlAo8xRa3+FhnOvHDy0xuyveu5LcgN9TnDrueXugQP/6KyEbd4wru5NYN7m+X2frTNjA9HX5Ab6lODWpFp74KB/f+mSTX15OQsz2AijQ0NL+vsy2s0CM/HPfvTxBrOsnegPcgN9RnBrUs0ZfUVs/N7o3u4sPLFqb6kzGb5/55JNtA8bZdSUMAPR+4vcQJ8R3Bp3C/QmsTFWVa3zY7Qd6E928trk7U8+nrw41juGBJ5K9P4kN9AnBLfG3WKF2c/uvXt9T86Ig9AIf/TeB5vfLjyRsig2OvdIZXXiIiLt8imTtn93R/vhUExYGC9VfWrB3K3k0+cvw+ttYBj47K6PN3jCZFx/kxvodYLjzLryxZdzZHTAAdewQeyefLMkWuTn932W/uxHuzegfNfKrGbfsS6cDYRBJP9y77L131owt9cesu8pwO/zHP0+/blC0hPIDfQqwfFDD+Tr3XhjxfeXLt50q5e7DtPQBteDa680hc2Iijj4u/0H1nXUQg3ijyD0oEFCBxAussdQC1+ZWN/UEob4+jsWbfo/dy7e+CmNzUP8/RzTIyO86no7ejhP73gzo6+77Z5CbqBXCf4Ejf+8bZFCV4BuON4HfSvdcUVqTJAh/lNqfRG273YbCE0yWJIaQgzXdYQu8R/fnbz+/aKiVftKzyQtiB2X+/LXHk2WSV4FdNv76n3xnkRuoNcIDmKD4DI6YPCDpUs2kdz0zDQmxp6hMaSa8cZMN7rVhyurElcZhjqgKohqJDSLMe6axjaEg2zToiLyj1OZsMGybPL47P98KGU1R70QIPfTO3Zm9GaD42nkBnrliS7qx5TRAQGMhXc8+XjyrZD7n9/7YDNIDHJjwuyL7347DpexVBcfE2SDiYxDSIYSUyFDXETZhdg49BksZOjgwRSHDLKdrKxOVH4+JGlz52zlnfBQoLuNBkNdJegu8Bu+9MhDq/Gyv95YIeiJ5AZ6heAg90Aad2MCbddTfzv7ZlehoRuOivuc4UrDv95793rjpTTMfDc2N4UpUmqkpjQjUUFqRWgfIjPb5AlBpBsEdpKfLb83bV5MtEdfLnuNfqN3CotScALEw0EwhJFJ3QLmRXrqpQIKnkpuoMe76ANt1vxWX/+a9PuMPFRWtCrqpAj9i++ujcMs+NsnilI+KS1b+m7hyRSn7jjpODtDSNW66mjhRTr8dH9A2AQmjwrPv2vyxO1zo6Nz58aM82hyf0I9modfeiXnGunXqL5iQvDDb97a88LxW2NcjvG5NN0UPJncQI8SHD/a0t+9kGf2GwK6ApDwVloC/FYdrTB78ZGHV797omjV6wcPp4KQGnk1EkM3xiWRYVM6Cf4pnUX6A8mTxmf/ImWlKcbcIPgj//NqDmoqCP7IrPjMLV9a3iOkupXl055ObqBHu+i49jgQyA1S539vbdytdPNWUYuEMbeR3CumTM7Oo3E3FqC8U3gipd3YmnzQzebxNMbSRFfXLvcQYrASpzSZjhBlTImIOCi2enNoaG4O++Pn+elFVdW9vjpxf1l5EvYbv0PYMD/H39+5eJNMumWApHh7SHfH5WYgN9BjBMckyEB49NLNVggAXfFnd+3eCDGOIdGugty/WrkiDQ9FhO2nNAZfbI/OFeQUxB7KxNYJz2FnpKY0PiHwWFwfj4f6+jsenTP7pocVIPefvshPz/xk/4Z/3r4z62Qvkxy9FfGdbLYXvvzQatwkI5N6BDhR45h29YRtFnIDPUZwLCiQqtcCY+2bPbDokqPV3l1aunSxPSb3ASL0WioPlQpEXWKP2YUnncL3D/s/T//+m+9kFFVVJarWWmvFJUkFmRWxndMQKkJjxh3pRklfduf6ID+xra4CpN6w4+2sX7z3QUbKf/53TdYXBeuaWlvDLjTU2/9z18ebpVuvAMMO8f0GM9l7AxjPd2XIZSZyAz1CcEysefsjj3FQMaEmo90GZsnVJNoe+r1mRkYcpEpV+rN7l60/8PS34r45X19C+pWZ8ZmxVOEam9vCjJfEjK014hqxya5aat1PT1d5EJ8SMSr//hnTMuWmuozT1RcSPz1dnPL+0cJUlPN3yUvW3zZuXO4Q2mZxdU2vteDr39iR9fyeTzfge+B3md+Ls/3olaElB4mlyQlmIzfQIwT39tYbB7Wjg95VHK6oYhLsLT2T9MuP9mz494/3btj43oeb/3To8BrVLTficktz2O2xsotOcRAUrZc7UrtvqYXvEK0HQEL6pJtcjhoZElKC/Kr8D48Vrjl87lxSCJHil19Z1Wsr4Brpd1AnqPO14uaa3oa7421GcgO3PIvu7Q9xuBlyYz7iF7t2b1hE3W51KQe3ZWLc/XZhUcofC46sCfXzdZytq7NvfnB52n2d3NX1WdmZpL8cPrrmrSNHxYy6bMUxbsfZ2XnlmrC7hoDQWbO9s+7bQu0GCs6eS/q/b+zQLn9GhASV/GHN38TJaK8ht+hUygka46OWTqbeR/KkCX12B5x6Xr9ZyQ3cEsHR5fTmm0luhtyYQHt+/2fr8JvE03hOTaZhEq2uqSUsISoi/yf33tXtrv6CX2y9jpYTzDQSG626kcxayD5CB4SOcJDtze+uFcZuoKqu3p7+2p/yLje38LG+a9qUzO8tS+r1Sr/z8LHUzR9+tNlG9fSv69YOl+Y+gyK4jJoOt9RFx2Uxi9wC6t5sTKLhN8FSU5AbJP/BnUs2vXfiZMr+8vKkv1IY/x+/qtny8d5uLWnlbriTULeVu8yi681hOx8SpMmu9f978P7VP39o5U11pyNCgkvEpJ4o69H5c3rsUlVHwMTev737fkZTa0vYZRLEZdIN8eAfXsx7gCT6Z7+4jqEQbHtvYpmrmckN3DTBUYmJ4Otk1KvQXXKj1cZDF6DjHWCYrFk+ZfL2x2bOzMz9ZhovYWViUPp56pZfoZYcS0/h31VgUQvya6SV42q2u4qB1FoekpILFxMTxo65qUmq6vp6+7JpUzNRDsgdERzco5eq3OFk9YVE43fIKz/bJYIeq6xOPFFNUlnF+f9YIFar/fuuvRuOkI2dBghumuDe2np3l9zfpXEaHrxwpLKCKw5uE10+eVL2/6NWIyYspJSdqHOMijZ8mJ8DrSCuZ+8oOLpm4Zbf1vzPZ1906Uk3XNElcQdrrbVO3o5ILUTEMX6/WVTXN9jfPXQkfXRwSMmKmQl98tCIvx4tXGP8XntOnVolkzrFAeop8dUHyoff+3Jza9hR3DlHtX3djrcyyqm3lfKiWGgks3gtborg3tp641bP7pAbFeSVQ65rmQfZ3jlRxKvQ0Lqeqa21b9m9ZwNIh262uqb9+ZkzSVdoPNsVyp1CS0aVlYktTxaasJ1C8nOyG8iPbUYSMZOnTb7p7ub0MaNz1961NG3tsjvTAvx8e/xuLHf44FhhKr6vOqEVlJ/vUgueV3Zmqbg8KL479H2l5UnnHPX2wqoLiff8d0bep2XlSb+jRgonaJnNKzFk48bu3924dc+nP/zg1On7ZdQrAGL/6313d3nyCye52qbm4YtjY3b5DfVp+v1Dqx5L/v0LeScv1EydPGrk8eNV1YlYUolVVxcbL48GoduuXvMH8XCJi3jJJDx6rmJh69Wrw+Z0cMOHWGDyTlbd5StRqjuOcLBs1XCG5jin6TpIAR8Vb6Yx7JOLb7/p6/hAbPjI/FF90DVXQK+hmIYVakKxoaUlbPGEuO0jAgMqhId7/Pzd959rvnbVn3ss/DfI5uszpOng2fMLMdvY3HbVH+VBx33210nD4iPO7GXoNsFRsb/xxo5Xmtva/KXJ9MDqpT9+7ZEHZLRT4Pvfn/HSJ68eOpy67fO8tU30O6TNmf28P5H813v3/fAOe2zuX44de7SVKhEWskwIH3H8XuqyjwsNLQ0bNswRHRpS4jd0SFPtlStRIOhVIv3JqouJ90yd/FqwXMlmxFsFR9buKy5JgR+TlYltJLVOYh6TG0htDw/Pr6ftBPj7OrZ9M22YLNI0uJ3IHBkaUrrvdHEKXxmg7z08IKBy1rixHZIRl9Re+yI/nZ0JIt8gW3VjYxSdSGWdlWlkh4ZFSMZLmt6EbnfRvW3sLR7U8FiXZ5afeP3PWZgdV5e/cLMIHk181+8z8kC2Fw58nt7Y1ML3bf9m994NROySf/sgd/OPd76XMTUi/OCWh1aufnLenK3oUqtuJGTPydNunzSyaML47GcfXpWsiK38nXUSSWzVhU+eOjnz376yevbv//bJ4V+Z2/sz3r2Fu6dNyUwcNyZX9VgOnz23VCa5RSP1eMRCIPX7UEg6xuE8Lkca2fi3J7s4MQ6yfXfHzoybfZiEJ6PbBMf7oaRqemC2+6VHHl7d1RtHMF5zvbUTEItPhOAHVTq657/d/cnG//0sL/0Hy5auX5UwI7OeKmBR1YVZoX7DHNp4GoVQ6A6b3/8wI/3VP/HJQ1RGWSllXlXxtbIG03iVZE/RqdSfv/l2zuLD...";
+function ComosLogo({ className = "h-16 w-16" }: { className?: string }) {
+  return (
+    <img
+      src="/COMOS_CALCULATOR/comos-logo.svg"
+      alt="COMOS logo"
+      className={className}
+    />
+  );
+}
 
 export default function ComosRoiCalculatorApp() {
   const [language, setLanguage] = useState<LanguageKey>("pt");
@@ -343,15 +351,27 @@ export default function ComosRoiCalculatorApp() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 p-6 md:p-10">
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Professional top header band */}
+      <header className="bg-[#2BAAAB] text-white px-6 md:px-10 py-3 shadow-md">
+        <div className="max-w-7xl mx-auto flex items-center gap-3">
+          <ComosLogo className="h-9 w-9" />
+          <span className="font-bold tracking-brand text-lg">COMOS</span>
+          <span className="mx-2 opacity-40 text-xl">|</span>
+          <span className="text-sm opacity-90 tracking-wide">Siemens Digital Industries Software</span>
+        </div>
+      </header>
+
+      <div className="p-6 md:p-10">
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="mb-4 flex items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
-                <img src={comosLogoSrc} alt="COMOS logo" className="h-12 w-12 object-contain" />
+            <div className="mb-3 flex items-center gap-3">
+              <ComosLogo className="h-14 w-14 drop-shadow-sm" />
+              <div>
+                <div className="text-xl font-extrabold tracking-brand text-[#2BAAAB]">COMOS</div>
+                <div className="text-xs text-slate-400 tracking-widest uppercase">by Siemens</div>
               </div>
-              <div className="text-sm font-medium tracking-[0.2em] text-slate-500">COMOS</div>
             </div>
             <div className="flex items-center gap-2 mb-2">
               <Badge className="rounded-full px-3 py-1 text-sm">{t.businessCase}</Badge>
@@ -395,24 +415,24 @@ export default function ComosRoiCalculatorApp() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          <Card className="lg:col-span-1 rounded-3xl shadow-sm border-0">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-xl"><Calculator className="h-5 w-5" /> {t.mainInputs}</CardTitle>
+          <Card className="lg:col-span-1 rounded-3xl shadow-sm border border-border/60">
+            <CardHeader className="border-b border-border/50 pb-4">
+              <CardTitle className="flex items-center gap-2 text-lg text-slate-700"><Calculator className="h-5 w-5 text-[#2BAAAB]" /> {t.mainInputs}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-5">
+            <CardContent className="space-y-5 pt-5">
               <Field label={t.impactedUsers} value={users} setValue={setUsers} />
               <Field label={t.avgHourCost} value={hourCost} setValue={setHourCost} step="10" />
 
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-3">
+              <div className="rounded-2xl border border-border bg-secondary/50 p-4 space-y-3">
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <div className="text-sm font-medium text-slate-900">{t.autoBenchmark}</div>
-                    <div className="text-xs text-slate-600">{t.autoBenchmarkDesc}</div>
+                    <div className="text-sm font-medium text-foreground">{t.autoBenchmark}</div>
+                    <div className="text-xs text-muted-foreground">{t.autoBenchmarkDesc}</div>
                   </div>
                   <button
                     type="button"
                     onClick={() => setAutoBenchmarkMode((v) => !v)}
-                    className={`rounded-full px-4 py-2 text-sm font-medium transition ${autoBenchmarkMode ? "bg-slate-900 text-white" : "bg-white text-slate-700 border border-slate-300"}`}
+                    className={`rounded-full px-4 py-2 text-sm font-medium transition ${autoBenchmarkMode ? "bg-[#2BAAAB] text-white shadow-sm" : "bg-white text-slate-600 border border-border hover:border-slate-400"}`}
                   >
                     {autoBenchmarkMode ? t.on : t.off}
                   </button>
@@ -482,11 +502,11 @@ export default function ComosRoiCalculatorApp() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-              <Card className="rounded-3xl shadow-sm border-0">
-                <CardHeader>
-                  <CardTitle>{t.financialIndicators}</CardTitle>
+              <Card className="rounded-3xl shadow-sm border border-border/60">
+                <CardHeader className="border-b border-border/50 pb-4">
+                  <CardTitle className="text-lg text-slate-700">{t.financialIndicators}</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4 text-sm">
+                <CardContent className="space-y-4 text-sm pt-5">
                   <KeyValue label="VPL / NPV" value={formatCurrency(model.npv, locale, currency)} />
                   <KeyValue label="TIR / IRR" value={Number.isFinite(model.irr) ? percent(model.irr * 100, locale) : t.nd} />
                   <KeyValue label={t.discountedPayback} value={model.discountedPayback ? `${numberFmt(model.discountedPayback, locale, 1)} ${t.years}` : t.notReached} />
@@ -495,11 +515,11 @@ export default function ComosRoiCalculatorApp() {
                 </CardContent>
               </Card>
 
-              <Card className="rounded-3xl shadow-sm border-0">
-                <CardHeader>
-                  <CardTitle>{t.annualBenefitsComposition}</CardTitle>
+              <Card className="rounded-3xl shadow-sm border border-border/60">
+                <CardHeader className="border-b border-border/50 pb-4">
+                  <CardTitle className="text-lg text-slate-700">{t.annualBenefitsComposition}</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 pt-5">
                   <BenefitBar label={t.engineeringProductivity} value={model.engineeringSavings} total={model.annualBenefit} currency={currency} locale={locale} />
                   <BenefitBar label={t.reworkReduction} value={model.reworkSavings} total={model.annualBenefit} currency={currency} locale={locale} />
                   <BenefitBar label={t.searchValidation} value={model.annualInfoSavings} total={model.annualBenefit} currency={currency} locale={locale} />
@@ -507,16 +527,16 @@ export default function ComosRoiCalculatorApp() {
               </Card>
             </div>
 
-            <Card className="rounded-3xl shadow-sm border-0">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2"><RefreshCcw className="h-5 w-5" /> {t.assumptionsTitle}</CardTitle>
+            <Card className="rounded-3xl shadow-sm border border-border/60">
+              <CardHeader className="border-b border-border/50 pb-4">
+                <CardTitle className="flex items-center gap-2 text-lg text-slate-700"><RefreshCcw className="h-5 w-5 text-[#2BAAAB]" /> {t.assumptionsTitle}</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pt-5">
                 <div className="grid md:grid-cols-3 gap-4">
                   {assumptions.map((item) => (
-                    <div key={item.title} className="rounded-2xl border border-slate-200 p-4 bg-white">
-                      <div className="text-sm text-slate-500 mb-1">{item.title}</div>
-                      <div className="text-2xl font-semibold">{item.value}</div>
+                    <div key={item.title} className="rounded-2xl border border-border p-4 bg-secondary/30">
+                      <div className="text-sm text-muted-foreground mb-1">{item.title}</div>
+                      <div className="text-2xl font-semibold text-[#2BAAAB]">{item.value}</div>
                       <p className="text-sm text-slate-600 mt-2">{item.note}</p>
                       <div className="mt-3 flex items-center gap-2">
                         {item.sources.map((source, index) => (
@@ -539,11 +559,11 @@ export default function ComosRoiCalculatorApp() {
               </CardContent>
             </Card>
 
-            <Card className="rounded-3xl shadow-sm border-0">
-              <CardHeader>
-                <CardTitle>{t.methodology}</CardTitle>
+            <Card className="rounded-3xl shadow-sm border border-border/60">
+              <CardHeader className="border-b border-border/50 pb-4">
+                <CardTitle className="text-lg text-slate-700">{t.methodology}</CardTitle>
               </CardHeader>
-              <CardContent className="text-sm text-slate-600 leading-6 space-y-3">
+              <CardContent className="text-sm text-slate-600 leading-6 space-y-3 pt-5">
                 <p>{t.p1}</p>
                 <p>{t.p2}</p>
                 <p>{t.p3}</p>
@@ -565,6 +585,7 @@ export default function ComosRoiCalculatorApp() {
             </a>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
@@ -606,8 +627,8 @@ function MetricCard({ title, value, icon }: { title: string; value: string; icon
     <Card className="rounded-3xl shadow-sm border-0">
       <CardContent className="p-5">
         <div className="flex items-center justify-between mb-3">
-          <div className="text-sm text-slate-500">{title}</div>
-          <div className="text-slate-500">{icon}</div>
+          <div className="text-sm text-slate-500 font-medium">{title}</div>
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2BAAAB]/10 text-[#2BAAAB]">{icon}</div>
         </div>
         <div className="text-2xl font-bold tracking-tight">{value}</div>
       </CardContent>
@@ -633,7 +654,7 @@ function BenefitBar({ label, value, total, currency, locale }: { label: string; 
         <span className="font-semibold">{formatCurrency(value, locale, currency)}</span>
       </div>
       <div className="w-full h-3 rounded-full bg-slate-100 overflow-hidden">
-        <div className="h-full rounded-full bg-slate-900" style={{ width: `${Math.max(0, Math.min(100, width))}%` }} />
+        <div className="h-full rounded-full bg-[#2BAAAB]" style={{ width: `${Math.max(0, Math.min(100, width))}%` }} />
       </div>
     </div>
   );
