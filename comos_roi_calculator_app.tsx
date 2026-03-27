@@ -805,29 +805,32 @@ function SourceList({
         <div key={group.label} className="space-y-1.5">
           <div className="text-[11px] uppercase tracking-[0.18em] text-slate-400">{group.label}</div>
           <ul className="flex flex-wrap gap-2">
-            {group.items.map((source) => (
-              <li key={source.url} className="relative group/tip">
-                <a
-                  href={resolveSourceUrl(source.url)}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`${itemTitle}: ${group.label} — ${source.label}`}
-                  className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
-                >
-                  <Link2 className="h-3.5 w-3.5 shrink-0" />
-                  <span className="sr-only">{source.label}</span>
-                </a>
-                {(source.tooltip || source.label) && (
+            {group.items.map((source, idx) => {
+              const tipId = `tip-${group.label}-${idx}`;
+              return (
+                <li key={source.url} className="relative group/tip">
+                  <a
+                    href={resolveSourceUrl(source.url)}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${itemTitle}: ${group.label} — ${source.label}`}
+                    aria-describedby={tipId}
+                    className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+                  >
+                    <Link2 className="h-3.5 w-3.5 shrink-0" />
+                    <span className="sr-only">{source.label}</span>
+                  </a>
                   <span
+                    id={tipId}
                     role="tooltip"
                     className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-slate-800 px-3 py-1.5 text-xs leading-snug text-white opacity-0 shadow-lg transition-opacity group-hover/tip:opacity-100"
                   >
                     {source.tooltip || source.label}
                     <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-slate-800" />
                   </span>
-                )}
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </div>
       ))}
