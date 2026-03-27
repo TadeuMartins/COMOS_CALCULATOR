@@ -868,8 +868,8 @@ function TimelineTab({
   const paybackYear = model.simplePayback != null ? Math.ceil(model.simplePayback) : null;
 
   const chartData = timelineData.map((row) => ({
-    name: `${t.year} ${row.yr}`,
-    [t.initialInvestmentShort]: row.yr === 0 ? row.inv : undefined,
+    yr: row.yr,
+    [t.initialInvestmentShort]: row.yr === 0 ? -row.inv : undefined,
     [t.annualSavingsShort]: row.yr > 0 ? row.savings : undefined,
     [t.cumulativeFlow]: row.cumulative,
     [t.discountedCumulative]: row.discountedCumulative,
@@ -909,7 +909,14 @@ function TimelineTab({
             <ResponsiveContainer width="100%" height={360}>
               <ComposedChart data={chartData} margin={{ top: 8, right: 24, left: 24, bottom: 8 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis dataKey="name" tick={{ fontSize: 12, fill: "#64748b" }} />
+                <XAxis
+                  dataKey="yr"
+                  type="number"
+                  domain={[0, horizonYears]}
+                  ticks={Array.from({ length: horizonYears + 1 }, (_, i) => i)}
+                  tickFormatter={(v: number) => `${t.year} ${v}`}
+                  tick={{ fontSize: 12, fill: "#64748b" }}
+                />
                 <YAxis
                   tickFormatter={(v: number) =>
                     new Intl.NumberFormat(locale, {
@@ -921,6 +928,7 @@ function TimelineTab({
                   width={72}
                 />
                 <Tooltip
+                  labelFormatter={(label) => `${t.year} ${label}`}
                   formatter={(value: TooltipValueType | undefined, name: number | string | undefined) =>
                     [fmtCur(Number(value ?? 0)), name ?? ""] as [string, string]
                   }
@@ -928,15 +936,20 @@ function TimelineTab({
                 />
                 <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "8px" }} />
                 <ReferenceLine y={0} stroke="#94a3b8" strokeDasharray="4 2" />
-                {paybackYear != null && paybackYear <= horizonYears && (
+                {model.simplePayback != null && model.simplePayback <= horizonYears && (
                   <ReferenceLine
-                    x={`${t.year} ${paybackYear}`}
+                    x={model.simplePayback}
                     stroke="#f59e0b"
                     strokeDasharray="4 2"
-                    label={{ value: t.paybackMark, position: "top", fontSize: 11, fill: "#f59e0b" }}
+                    label={{
+                      value: `${t.paybackMark} ≈ ${numberFmt(model.simplePayback, locale, 1)} ${t.years}`,
+                      position: "top",
+                      fontSize: 11,
+                      fill: "#f59e0b",
+                    }}
                   />
                 )}
-                <Bar dataKey={t.initialInvestmentShort} fill="#ef4444" radius={[6, 6, 0, 0]} maxBarSize={48} />
+                <Bar dataKey={t.initialInvestmentShort} fill="#ef4444" radius={[0, 0, 6, 6]} maxBarSize={48} />
                 <Bar dataKey={t.annualSavingsShort} fill="#2BAAAB" radius={[6, 6, 0, 0]} maxBarSize={48} />
                 <Line type="monotone" dataKey={t.cumulativeFlow} stroke="#6366f1" strokeWidth={2.5} dot={{ r: 4 }} />
                 <Line type="monotone" dataKey={t.discountedCumulative} stroke="#a78bfa" strokeWidth={2} strokeDasharray="5 3" dot={{ r: 3 }} />
@@ -973,8 +986,8 @@ function TimelineTab({
                       <td className="py-2.5 pr-4 font-medium text-slate-700">
                         {row.yr}
                         {isPaybackYear && (
-                          <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase text-amber-700">
-                            {t.paybackMark}
+                          <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
+                            {t.paybackMark} ≈ {numberFmt(model.simplePayback!, locale, 1)} {t.years}
                           </span>
                         )}
                       </td>
