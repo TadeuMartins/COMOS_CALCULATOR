@@ -314,14 +314,37 @@ export default function ComosRoiCalculatorApp() {
         {
           label: language === "pt" ? "Chalmers systematic review sobre quantificação de valor em BIM" : "Chalmers systematic review on quantifying BIM investment value",
           url: "https://research.chalmers.se/publication/540280/file/540280_Fulltext.pdf",
+          tooltip: language === "pt" ? "Revisão sistemática sobre retorno de investimento em BIM — Chalmers University" : "Systematic review on BIM investment returns — Chalmers University",
         },
         {
           label: language === "pt" ? "ScienceDirect 2024 sobre influência do BIM em tempo e custo" : "ScienceDirect 2024 on BIM influence on time and cost",
           url: "https://www.sciencedirect.com/science/article/pii/S2590123024008107",
+          tooltip: language === "pt" ? "Estudo sobre impacto do BIM em prazo e custo de projetos — ScienceDirect" : "Study on BIM impact on project time and cost — ScienceDirect",
         },
         {
           label: language === "pt" ? "COMOS brochure com caso Novartis (8%–12% engineering savings)" : "COMOS brochure with Novartis case (8%–12% engineering savings)",
           url: "https://support.industry.siemens.com/cs/attachments/109765354/COMOS_Imagebroschuere_EN.pdf",
+          tooltip: language === "pt" ? "Caso Novartis: 8%–12% de economia em engenharia — Siemens COMOS" : "Novartis case: 8%–12% engineering savings — Siemens COMOS",
+        },
+        {
+          label: language === "pt" ? "PwC Global Mine 2024 — tendências de custo e produtividade" : "PwC Global Mine 2024 — cost and productivity trends",
+          url: "https://www.pwc.com/gx/en/mining/assets/pwc-global-mine-2024.pdf",
+          tooltip: language === "pt" ? "Panorama global de mineração: produtividade e otimização de custos — PwC" : "Global mining outlook: productivity and cost optimization — PwC",
+        },
+        {
+          label: language === "pt" ? "McKinsey: produtividade em operações de mineração" : "McKinsey: productivity in mining operations",
+          url: "https://www.mckinsey.com/industries/metals-and-mining/our-insights/productivity-in-mining-operations-reversing-the-downward-trend",
+          tooltip: language === "pt" ? "Como reverter a queda de produtividade na mineração — McKinsey" : "How to reverse declining mining productivity — McKinsey",
+        },
+        {
+          label: language === "pt" ? "McKinsey: inovação digital para produtividade em mineração" : "McKinsey: digital innovation for mining productivity",
+          url: "https://www.mckinsey.com/industries/metals-and-mining/our-insights/how-digital-innovation-can-improve-mining-productivity",
+          tooltip: language === "pt" ? "Inovação digital elevando a produtividade na mineração — McKinsey" : "Digital innovation boosting mining productivity — McKinsey",
+        },
+        {
+          label: language === "pt" ? "McKinsey: excelência operacional em mineração" : "McKinsey: mining for operational excellence",
+          url: "https://www.mckinsey.com/capabilities/operations/our-insights/mining-for-operational-excellence",
+          tooltip: language === "pt" ? "Estratégias para excelência operacional em mineração — McKinsey" : "Strategies for operational excellence in mining — McKinsey",
         },
       ],
     },
@@ -336,18 +359,22 @@ export default function ComosRoiCalculatorApp() {
         {
           label: language === "pt" ? "NIST sobre custo de interoperabilidade inadequada" : "NIST on the cost of inadequate interoperability",
           url: "https://nvlpubs.nist.gov/nistpubs/gcr/2004/nist.gcr.04-867.pdf",
+          tooltip: language === "pt" ? "Custo da falta de interoperabilidade em instalações industriais — NIST" : "Cost of inadequate interoperability in industrial facilities — NIST",
         },
         {
           label: language === "pt" ? "Love, Irani e Edwards sobre rework como problema endêmico" : "Love, Irani, and Edwards on rework as an endemic problem",
           url: "https://bura.brunel.ac.uk/bitstream/2438/1730/1/01347434.pdf",
+          tooltip: language === "pt" ? "Retrabalho como problema endêmico em projetos — Brunel University" : "Rework as an endemic problem in projects — Brunel University",
         },
         {
           label: language === "pt" ? "MDPI 2020 sobre redução de horas acumuladas com BIM" : "MDPI 2020 on reduced cumulative hours with BIM",
           url: "https://www.mdpi.com/2071-1050/12/21/8927",
+          tooltip: language === "pt" ? "Redução de horas acumuladas em projetos com uso de BIM — MDPI" : "Reduction of cumulative project hours using BIM — MDPI",
         },
         {
           label: language === "pt" ? "PlanGrid/FMI sobre retrabalho ligado a dados ruins e má comunicação" : "PlanGrid/FMI on rework caused by bad data and miscommunication",
           url: "https://pg.plangrid.com/rs/572-JSV-775/images/Construction_Disconnected.pdf",
+          tooltip: language === "pt" ? "Retrabalho causado por dados ruins e comunicação falha — PlanGrid/FMI" : "Rework driven by poor data and miscommunication — PlanGrid/FMI",
         },
         {
           label:
@@ -355,6 +382,22 @@ export default function ComosRoiCalculatorApp() {
               ? "COMOS brochure (base integrada para reduzir inconsistências e retrabalho)"
               : "COMOS brochure (integrated data foundation to reduce inconsistencies and rework)",
           url: "https://support.industry.siemens.com/cs/attachments/109765354/COMOS_Imagebroschuere_EN.pdf",
+          tooltip: language === "pt" ? "Base de dados integrada para reduzir inconsistências — Siemens COMOS" : "Integrated data foundation to cut inconsistencies — Siemens COMOS",
+        },
+        {
+          label: language === "pt" ? "Deloitte/Siemens: digital twin e empresa baseada em modelo" : "Deloitte/Siemens: digital twin and the model-based enterprise",
+          url: "https://blogs.sw.siemens.com/thought-leadership/2023/04/05/deloitte-siemens-and-the-model-based-enterprise-the-future-of-the-digital-twin/",
+          tooltip: language === "pt" ? "Digital twin como base para reduzir retrabalho em engenharia — Deloitte/Siemens" : "Digital twin as foundation to reduce engineering rework — Deloitte/Siemens",
+        },
+        {
+          label: language === "pt" ? "Deloitte: aplicações de digital twin — ponte entre físico e digital" : "Deloitte: digital twin applications — bridging physical and digital",
+          url: "https://www2.deloitte.com/us/en/insights/focus/tech-trends/2020/digital-twin-applications-bridging-the-physical-and-digital.html",
+          tooltip: language === "pt" ? "Aplicações de gêmeo digital para eliminar erros e retrabalho — Deloitte" : "Digital twin applications eliminating errors and rework — Deloitte",
+        },
+        {
+          label: language === "pt" ? "Deloitte: estratégia de digital twin para redução de riscos" : "Deloitte: digital twin strategy for risk reduction",
+          url: "https://www.deloitte.com/us/en/insights/topics/business-strategy-growth/digital-twin-strategy.html",
+          tooltip: language === "pt" ? "Estratégia de gêmeo digital para minimizar riscos e retrabalho — Deloitte" : "Digital twin strategy to minimize risk and rework — Deloitte",
         },
       ],
     },
@@ -369,14 +412,17 @@ export default function ComosRoiCalculatorApp() {
         {
           label: language === "pt" ? "McKinsey The Social Economy" : "McKinsey The Social Economy",
           url: "https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/the-social-economy",
+          tooltip: language === "pt" ? "Valor da economia social e busca de informação — McKinsey" : "Value of the social economy and information search — McKinsey",
         },
         {
           label: language === "pt" ? "McKinsey Capturing business value with social technologies" : "McKinsey Capturing business value with social technologies",
           url: "https://www.mckinsey.com/~/media/McKinsey/Industries/Technology%20Media%20and%20Telecommunications/High%20Tech/Our%20Insights/Capturing%20business%20value%20with%20social%20technologies/Capturing%20business%20value%20with%20social%20technologies.pdf",
+          tooltip: language === "pt" ? "Captura de valor com tecnologias sociais na busca de informação — McKinsey" : "Capturing value with social technologies in information search — McKinsey",
         },
         {
           label: language === "pt" ? "Deloitte Access Economics 2025 sobre adoção digital na construção" : "Deloitte Access Economics 2025 on digital adoption in construction",
           url: "https://www.deloitte.com/au/en/services/economics/analysis/state-digital-adoption-construction-industry.html",
+          tooltip: language === "pt" ? "Estado da adoção digital na construção e acesso à informação — Deloitte" : "State of digital adoption in construction and information access — Deloitte",
         },
         {
           label:
@@ -384,6 +430,22 @@ export default function ComosRoiCalculatorApp() {
               ? "COMOS brochure (single source of truth e fluxo contínuo da informação)"
               : "COMOS brochure (single source of truth and continuous flow of information)",
           url: "https://support.industry.siemens.com/cs/attachments/109765354/COMOS_Imagebroschuere_EN.pdf",
+          tooltip: language === "pt" ? "Fonte única de verdade e fluxo contínuo de informação — Siemens COMOS" : "Single source of truth and continuous information flow — Siemens COMOS",
+        },
+        {
+          label: language === "pt" ? "Siemens: mina digital — gestão de informação no ciclo de vida" : "Siemens: digital mine — lifecycle information management",
+          url: "https://assets.new.siemens.com/siemens/assets/api/uuid:b773dc99-f6c6-4747-96c9-0395b98c39e8/minerals-days-chile-digital-mine-roland-ehrl.pdf",
+          tooltip: language === "pt" ? "Gestão de informação da mina digital no ciclo de vida — Siemens" : "Digital mine lifecycle information management — Siemens",
+        },
+        {
+          label: language === "pt" ? "Siemens: ferramenta de colaboração digital para mineração" : "Siemens: digital collaboration tool for mining operations",
+          url: "https://resources.sw.siemens.com/en-US/solution-brief-mining-operations-digital-collaboration-tool/",
+          tooltip: language === "pt" ? "Colaboração digital para acesso rápido a dados de operação — Siemens" : "Digital collaboration for quick access to operations data — Siemens",
+        },
+        {
+          label: language === "pt" ? "Siemens: excelência digital no ciclo de vida da mineração" : "Siemens: digital lifecycle excellence for mining",
+          url: "https://blogs.sw.siemens.com/energy-utilities/2023/07/07/digital-lifecycle-excellence-for-mining/",
+          tooltip: language === "pt" ? "Excelência no ciclo de vida digital para mineração — Siemens" : "Digital lifecycle excellence for mining operations — Siemens",
         },
       ],
     },
@@ -721,7 +783,7 @@ function SourceList({
   externalSourcesLabel,
   siemensSourcesLabel,
 }: {
-  sources: Array<{ label: string; url: string }>;
+  sources: Array<{ label: string; url: string; tooltip?: string }>;
   itemTitle: string;
   externalSourcesLabel: string;
   siemensSourcesLabel: string;
@@ -738,26 +800,37 @@ function SourceList({
   ].filter((group) => group.items.length > 0);
 
   return (
-    <div className="mt-6 space-y-3">
+    <div className="mt-4 space-y-1.5">
       {groupedSources.map((group) => (
-        <div key={group.label} className="space-y-1.5">
-          <div className="text-[11px] uppercase tracking-[0.18em] text-slate-400">{group.label}</div>
-          <ul className="flex flex-wrap gap-2">
-            {group.items.map((source) => (
-              <li key={source.url}>
-                <a
-                  href={resolveSourceUrl(source.url)}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`${itemTitle}: ${group.label} — ${source.label}`}
-                  title={source.label}
-                  className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
-                >
-                  <Link2 className="h-3.5 w-3.5 shrink-0" />
-                  <span className="sr-only">{source.label}</span>
-                </a>
-              </li>
-            ))}
+        <div key={group.label} className="space-y-1">
+          <div className="text-[10px] uppercase tracking-[0.18em] text-slate-400">{group.label}</div>
+          <ul className="flex flex-wrap gap-1">
+            {group.items.map((source, idx) => {
+              const tipId = `tip-${group.label}-${idx}`;
+              return (
+                <li key={source.url} className="relative group/tip">
+                  <a
+                    href={resolveSourceUrl(source.url)}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${itemTitle}: ${group.label} — ${source.label}`}
+                    aria-describedby={tipId}
+                    className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition hover:border-slate-400 hover:text-slate-900"
+                  >
+                    <Link2 className="h-2.5 w-2.5 shrink-0" />
+                    <span className="sr-only">{source.label}</span>
+                  </a>
+                  <span
+                    id={tipId}
+                    role="tooltip"
+                    className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-800 px-2.5 py-1 text-[11px] leading-snug text-white opacity-0 shadow-lg transition-opacity group-hover/tip:opacity-100"
+                  >
+                    {source.tooltip || source.label}
+                    <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-slate-800" />
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       ))}
