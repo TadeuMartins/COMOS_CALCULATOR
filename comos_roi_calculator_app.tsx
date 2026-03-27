@@ -2,10 +2,23 @@ import React, { useMemo, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Slider } from "@/components/ui/slider";
 import { Separator } from "@/components/ui/separator";
-import { BarChart3, Calculator, TrendingUp, Clock3, RefreshCcw, FileBarChart2, Languages, Link2 } from "lucide-react";
+import { BarChart3, Calculator, TrendingUp, Clock3, RefreshCcw, FileBarChart2, Languages, Link2, LineChart as LineChartIcon } from "lucide-react";
+import {
+  ComposedChart,
+  Bar,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ReferenceLine,
+  ResponsiveContainer,
+  type TooltipValueType,
+} from "recharts";
 
 function formatCurrency(value: number, locale: string, currency: "BRL" | "USD") {
   return new Intl.NumberFormat(locale, {
@@ -108,6 +121,7 @@ export default function ComosRoiCalculatorApp() {
   const [language, setLanguage] = useState<LanguageKey>("en");
   const [currency, setCurrency] = useState<CurrencyKey>("USD");
   const [scenario, setScenario] = useState<ScenarioKey>("base");
+  const [mainTab, setMainTab] = useState("calculator");
 
   const [users, setUsers] = useState(25);
   const [hourCost, setHourCost] = useState(180);
@@ -186,6 +200,25 @@ export default function ComosRoiCalculatorApp() {
       portuguese: "Português",
       english: "English",
       nd: "N/D",
+      tabCalculator: "Calculadora",
+      tabTimeline: "Análise Temporal",
+      timelineTitle: "Evolução Temporal do Investimento",
+      year: "Ano",
+      initialInvestmentShort: "Investimento",
+      annualSavingsShort: "Economia",
+      netFlow: "Fluxo Líquido",
+      cumulativeFlow: "Acumulado",
+      discountedCumulative: "Acumulado Descontado",
+      paybackMark: "Payback",
+      summaryCards: "Resumo Financeiro",
+      annualTable: "Tabela Anual",
+      chartTitle: "Fluxo de Caixa Anual e Acumulado",
+      paybackNote: "O payback ocorre quando o acumulado cruza o zero.",
+      roiAtHorizon: "ROI no horizonte",
+      npvLabel: "VPL (NPV)",
+      irrLabel: "TIR (IRR)",
+      simplePaybackLabel: "Payback simples",
+      discountedPaybackLabel: "Payback descontado",
     },
     en: {
       businessCase: "COMOS Business Case",
@@ -249,6 +282,25 @@ export default function ComosRoiCalculatorApp() {
       portuguese: "Português",
       english: "English",
       nd: "N/A",
+      tabCalculator: "Calculator",
+      tabTimeline: "Temporal Analysis",
+      timelineTitle: "Investment Timeline",
+      year: "Year",
+      initialInvestmentShort: "Investment",
+      annualSavingsShort: "Savings",
+      netFlow: "Net Flow",
+      cumulativeFlow: "Cumulative",
+      discountedCumulative: "Discounted Cumulative",
+      paybackMark: "Payback",
+      summaryCards: "Financial Summary",
+      annualTable: "Annual Table",
+      chartTitle: "Annual Cash Flow and Cumulative",
+      paybackNote: "Payback occurs when the cumulative crosses zero.",
+      roiAtHorizon: "ROI at horizon",
+      npvLabel: "NPV",
+      irrLabel: "IRR",
+      simplePaybackLabel: "Simple payback",
+      discountedPaybackLabel: "Discounted payback",
     },
   }[language];
 
@@ -301,6 +353,25 @@ export default function ComosRoiCalculatorApp() {
       discountedPayback,
     };
   }, [effectiveEngineeringHoursMonth, hourCost, reworkPct, preset, annualRecurring, users, effectiveInfoHoursMonth, investment, horizonYears, discountRatePct]);
+
+  const timelineData = useMemo(() => {
+    const rate = discountRatePct / 100;
+    const rows = [];
+    let cumulative = 0;
+    let discountedCumulative = 0;
+    for (let yr = 0; yr <= horizonYears; yr++) {
+      const isYear0 = yr === 0;
+      const inv = isYear0 ? investment : 0;
+      const savings = isYear0 ? 0 : model.annualBenefit;
+      const recurring = isYear0 ? 0 : annualRecurring;
+      const net = isYear0 ? -investment : model.annualNet;
+      const discountedNet = net / Math.pow(1 + rate, yr);
+      cumulative += net;
+      discountedCumulative += discountedNet;
+      rows.push({ yr, inv, savings, recurring, net, cumulative, discountedCumulative });
+    }
+    return rows;
+  }, [model, investment, annualRecurring, horizonYears, discountRatePct]);
 
   const assumptions = [
     {
@@ -496,6 +567,29 @@ export default function ComosRoiCalculatorApp() {
         </div>
       </header>
 
+      <Tabs value={mainTab} onValueChange={setMainTab}>
+        <div className="border-b border-border/60 bg-white px-4 md:px-6 xl:px-8">
+          <div className="mx-auto max-w-7xl">
+            <TabsList className="mt-0 h-12 gap-1 rounded-none border-0 bg-transparent p-0">
+              <TabsTrigger
+                value="calculator"
+                className="flex items-center gap-2 rounded-none border-b-2 border-transparent px-4 py-3 text-sm font-medium text-slate-500 data-[state=active]:border-[#2BAAAB] data-[state=active]:bg-transparent data-[state=active]:text-[#2BAAAB] data-[state=active]:shadow-none"
+              >
+                <Calculator className="h-4 w-4" />
+                {t.tabCalculator}
+              </TabsTrigger>
+              <TabsTrigger
+                value="timeline"
+                className="flex items-center gap-2 rounded-none border-b-2 border-transparent px-4 py-3 text-sm font-medium text-slate-500 data-[state=active]:border-[#2BAAAB] data-[state=active]:bg-transparent data-[state=active]:text-[#2BAAAB] data-[state=active]:shadow-none"
+              >
+                <LineChartIcon className="h-4 w-4" />
+                {t.tabTimeline}
+              </TabsTrigger>
+            </TabsList>
+          </div>
+        </div>
+
+        <TabsContent value="calculator" className="mt-0">
       <div className="px-4 py-5 md:px-6 md:py-8 xl:px-8">
       <div className="mx-auto w-full max-w-7xl space-y-5">
         <div className="space-y-3">
@@ -690,6 +784,248 @@ export default function ComosRoiCalculatorApp() {
           </div>
         </div>
       </div>
+      </div>
+        </TabsContent>
+
+        <TabsContent value="timeline" className="mt-0">
+          <TimelineTab
+            model={model}
+            timelineData={timelineData}
+            investment={investment}
+            horizonYears={horizonYears}
+            currency={currency}
+            locale={locale}
+            t={t}
+          />
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
+
+type TranslationT = {
+  year: string;
+  initialInvestmentShort: string;
+  annualSavingsShort: string;
+  netFlow: string;
+  cumulativeFlow: string;
+  discountedCumulative: string;
+  paybackMark: string;
+  summaryCards: string;
+  annualTable: string;
+  chartTitle: string;
+  paybackNote: string;
+  roiAtHorizon: string;
+  npvLabel: string;
+  irrLabel: string;
+  simplePaybackLabel: string;
+  discountedPaybackLabel: string;
+  notReached: string;
+  years: string;
+  nd: string;
+  timelineTitle: string;
+  [key: string]: string;
+};
+
+type TimelineRow = {
+  yr: number;
+  inv: number;
+  savings: number;
+  recurring: number;
+  net: number;
+  cumulative: number;
+  discountedCumulative: number;
+};
+
+type ModelResult = {
+  annualBenefit: number;
+  annualNet: number;
+  npv: number;
+  irr: number;
+  roi: number;
+  simplePayback: number | null;
+  discountedPayback: number | null;
+  [key: string]: unknown;
+};
+
+function TimelineTab({
+  model,
+  timelineData,
+  investment,
+  horizonYears,
+  currency,
+  locale,
+  t,
+}: {
+  model: ModelResult;
+  timelineData: TimelineRow[];
+  investment: number;
+  horizonYears: number;
+  currency: CurrencyKey;
+  locale: string;
+  t: TranslationT;
+}) {
+  const paybackYear = model.simplePayback != null ? Math.ceil(model.simplePayback) : null;
+
+  const chartData = timelineData.map((row) => ({
+    name: `${t.year} ${row.yr}`,
+    [t.initialInvestmentShort]: row.yr === 0 ? row.inv : undefined,
+    [t.annualSavingsShort]: row.yr > 0 ? row.savings : undefined,
+    [t.cumulativeFlow]: row.cumulative,
+    [t.discountedCumulative]: row.discountedCumulative,
+  }));
+
+  const fmtCur = (v: number) => formatCurrency(v, locale, currency);
+  const fmtPct = (v: number) => percent(v, locale);
+  const fmtYrs = (v: number | null) =>
+    v != null ? `${numberFmt(v, locale, 1)} ${t.years}` : t.notReached;
+
+  return (
+    <div className="px-4 py-6 md:px-6 md:py-8 xl:px-8">
+      <div className="mx-auto w-full max-w-7xl space-y-6">
+        <div className="w-full rounded-[1.75rem] border border-border/70 bg-gradient-to-br from-white via-white to-slate-50/80 p-5 shadow-sm md:p-6">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-950 md:text-3xl">{t.timelineTitle}</h2>
+          <p className="mt-1 text-sm text-slate-500">{t.paybackNote}</p>
+        </div>
+
+        {/* Summary cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <MetricCard title={t.roiAtHorizon} value={fmtPct(model.roi)} icon={<FileBarChart2 className="h-5 w-5" />} />
+          <MetricCard title={t.npvLabel} value={fmtCur(model.npv)} icon={<TrendingUp className="h-5 w-5" />} />
+          <MetricCard
+            title={t.irrLabel}
+            value={Number.isFinite(model.irr) ? fmtPct(model.irr * 100) : t.nd}
+            icon={<BarChart3 className="h-5 w-5" />}
+          />
+          <MetricCard title={t.simplePaybackLabel} value={fmtYrs(model.simplePayback)} icon={<Clock3 className="h-5 w-5" />} />
+        </div>
+
+        {/* Chart */}
+        <Card className="rounded-3xl shadow-sm border border-border/60">
+          <CardHeader className="border-b border-border/50 pb-4">
+            <CardTitle className="text-lg text-slate-700">{t.chartTitle}</CardTitle>
+          </CardHeader>
+          <CardContent className="pt-5 pb-2">
+            <ResponsiveContainer width="100%" height={360}>
+              <ComposedChart data={chartData} margin={{ top: 8, right: 24, left: 24, bottom: 8 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                <XAxis dataKey="name" tick={{ fontSize: 12, fill: "#64748b" }} />
+                <YAxis
+                  tickFormatter={(v: number) =>
+                    new Intl.NumberFormat(locale, {
+                      notation: "compact",
+                      maximumFractionDigits: 1,
+                    }).format(v)
+                  }
+                  tick={{ fontSize: 11, fill: "#64748b" }}
+                  width={72}
+                />
+                <Tooltip
+                  formatter={(value: TooltipValueType | undefined, name: number | string | undefined) =>
+                    [fmtCur(Number(value ?? 0)), name ?? ""] as [string, string]
+                  }
+                  contentStyle={{ borderRadius: "12px", fontSize: "12px" }}
+                />
+                <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "8px" }} />
+                <ReferenceLine y={0} stroke="#94a3b8" strokeDasharray="4 2" />
+                {paybackYear != null && paybackYear <= horizonYears && (
+                  <ReferenceLine
+                    x={`${t.year} ${paybackYear}`}
+                    stroke="#f59e0b"
+                    strokeDasharray="4 2"
+                    label={{ value: t.paybackMark, position: "top", fontSize: 11, fill: "#f59e0b" }}
+                  />
+                )}
+                <Bar dataKey={t.initialInvestmentShort} fill="#ef4444" radius={[6, 6, 0, 0]} maxBarSize={48} />
+                <Bar dataKey={t.annualSavingsShort} fill="#2BAAAB" radius={[6, 6, 0, 0]} maxBarSize={48} />
+                <Line type="monotone" dataKey={t.cumulativeFlow} stroke="#6366f1" strokeWidth={2.5} dot={{ r: 4 }} />
+                <Line type="monotone" dataKey={t.discountedCumulative} stroke="#a78bfa" strokeWidth={2} strokeDasharray="5 3" dot={{ r: 3 }} />
+              </ComposedChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        {/* Annual table */}
+        <Card className="rounded-3xl shadow-sm border border-border/60">
+          <CardHeader className="border-b border-border/50 pb-4">
+            <CardTitle className="text-lg text-slate-700">{t.annualTable}</CardTitle>
+          </CardHeader>
+          <CardContent className="pt-5 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 text-slate-500">
+                  <th className="pb-3 pr-4 text-left font-medium">{t.year}</th>
+                  <th className="pb-3 pr-4 text-right font-medium">{t.initialInvestmentShort}</th>
+                  <th className="pb-3 pr-4 text-right font-medium">{t.annualSavingsShort}</th>
+                  <th className="pb-3 pr-4 text-right font-medium">{t.netFlow}</th>
+                  <th className="pb-3 pr-4 text-right font-medium">{t.cumulativeFlow}</th>
+                  <th className="pb-3 text-right font-medium">{t.discountedCumulative}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {timelineData.map((row) => {
+                  const isPaybackYear = paybackYear === row.yr && row.yr > 0;
+                  return (
+                    <tr
+                      key={row.yr}
+                      className={`border-b border-slate-100 last:border-0 ${isPaybackYear ? "bg-amber-50" : ""}`}
+                    >
+                      <td className="py-2.5 pr-4 font-medium text-slate-700">
+                        {row.yr}
+                        {isPaybackYear && (
+                          <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold uppercase text-amber-700">
+                            {t.paybackMark}
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-2.5 pr-4 text-right text-slate-600">{row.inv > 0 ? fmtCur(row.inv) : "–"}</td>
+                      <td className="py-2.5 pr-4 text-right text-slate-600">{row.savings > 0 ? fmtCur(row.savings) : "–"}</td>
+                      <td className={`py-2.5 pr-4 text-right font-medium ${row.net >= 0 ? "text-[#2BAAAB]" : "text-red-500"}`}>
+                        {fmtCur(row.net)}
+                      </td>
+                      <td className={`py-2.5 pr-4 text-right font-semibold ${row.cumulative >= 0 ? "text-[#2BAAAB]" : "text-slate-700"}`}>
+                        {fmtCur(row.cumulative)}
+                      </td>
+                      <td className={`py-2.5 text-right font-medium ${row.discountedCumulative >= 0 ? "text-[#2BAAAB]" : "text-slate-500"}`}>
+                        {fmtCur(row.discountedCumulative)}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </CardContent>
+        </Card>
+
+        {/* Extra financial indicators */}
+        <Card className="rounded-3xl shadow-sm border border-border/60">
+          <CardHeader className="border-b border-border/50 pb-4">
+            <CardTitle className="text-lg text-slate-700">
+              {t.summaryCards}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm pt-5">
+            <KeyValue label={t.npvLabel} value={fmtCur(model.npv)} />
+            <KeyValue label={t.irrLabel} value={Number.isFinite(model.irr) ? fmtPct(model.irr * 100) : t.nd} />
+            <KeyValue label={t.simplePaybackLabel} value={fmtYrs(model.simplePayback)} />
+            <KeyValue label={t.discountedPaybackLabel} value={fmtYrs(model.discountedPayback)} />
+            <KeyValue label={t.roiAtHorizon} value={fmtPct(model.roi)} />
+          </CardContent>
+        </Card>
+
+        <div className="pt-2 text-center text-sm text-slate-500">
+          <span>By </span>
+          <span className="font-medium text-slate-700">Tadeu Martins PMP, MBA</span>
+          <span className="mx-2">•</span>
+          <a
+            href="https://www.linkedin.com/in/tadeu-martins-pmp-tecnologia-industria-engenharia-transformacao-digital-projetos-gestao-inovacao/"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4 hover:text-slate-900"
+          >
+            LinkedIn
+          </a>
+        </div>
       </div>
     </div>
   );
