@@ -907,7 +907,7 @@ function TimelineTab({
           </CardHeader>
           <CardContent className="pt-5 pb-2">
             <ResponsiveContainer width="100%" height={360}>
-              <ComposedChart data={chartData} margin={{ top: 8, right: 24, left: 24, bottom: 8 }}>
+              <ComposedChart data={chartData} margin={{ top: 24, right: 24, left: 24, bottom: 8 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                 <XAxis
                   dataKey="yr"
